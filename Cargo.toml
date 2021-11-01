@@ -1,0 +1,23 @@
+[package]
+name = "hulk"
+version = "0.1.3"
+edition = "2021"
+authors = ["bilal <skillzaa.com@gmail.com>"]
+description = "Rust Task Runner"
+
+repository = "https://github.com/skillzaa/hulk.git"
+
+homepage = "https://github.com/skillzaa/hulk.git"
+
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+doctest = true
+
+[[bin]]
+name = "hulk"
+test = false
+bench = false
+
+
+[dependencies]
+comrak = "0.12.1"

@@ -1,0 +1,97 @@
+//mod hfs;
+// use std::fs::File;
+// use std::fs;
+// use std::io::Write;
+// use std::io::Result;
+// use serde::{Deserialize, Serialize};
+// use serde_json::Result;
+// use serde_json::Value;
+// use std::collections::HashMap;
+// #[derive(Serialize, Deserialize)]
+// #[derive(Debug)]
+pub struct Person {
+    name: String,
+    task_type: String,
+    age: u8,
+}
+// #[derive(Serialize, Deserialize)]
+// #[derive(Debug)]
+pub struct Task {
+    name: String,
+    task_type: String,
+    file_name:String,
+    path:String,
+    extention:String,
+}
+impl Task {
+    fn new(){
+        5
+    }
+    fn welcome(){
+        55
+    }
+}
+//========================
+// fn ddeserialize()->Result<()>{
+//      let data = r#"
+//      [
+//        "taskone" : {
+//          "name": "John Doe",
+//          "task_type": "copy",
+//          "age": 43
+//         },
+//         "taskone" : {
+//             "name": "Jane Michels",
+//             "task_type": "paste",
+//             "age": 35
+//         }
+//     ]
+//      "#;
+//      let v:Value = serde_json::from_str(data)?;
+// //  let pers: Vec<Person> = serde_json::from_str(data)?;
+// //  let pers: HashMap<String,Person> = serde_json::from_str(data)?;
+//  println!("HashMap======> {:?}", v);
+
+//  Ok(())
+// }
+// fn deserialize()->Result<()>{
+//      // Some JSON input data as a &str. Maybe this comes from the user.
+//      let data = r#"
+//      [
+//         {
+//          "name": "John Doe",
+//          "age": 43,
+//          "task_type" : "cut"
+//         },
+//         {
+//             "name": "Jane Michels",
+//             "age": 35,
+//             "task_type" : "cut"
+//         }
+//     ]
+//      "#;
+
+//  // Parse the string of data into a Person object. This is exactly the
+//  // same function as the one that produced serde_json::Value above, but
+//  // now we are asking it for a Person as output.
+//  let pers: Vec<Person> = serde_json::from_str(data)?;
+// //  println!("Please call {} at the number {}", p.name, p.phones[0]);
+//  println!("Pers {:?}", pers);
+
+//  Ok(())
+// }
+// fn serialize()->Result<()>{
+//     let mut j : Vec<Person> = Vec::new();
+//     j.push(Person { name: String::from("jill"), age: 96 ,          task_type: String::from("cut")});
+//     j.push(Person { name: String::from("mike"), age: 11 ,          task_type: String::from("cut")});
+//     j.push(Person { name: String::from("nikey"), age: 33,          task_type: String::from("cut") });
+
+//     let pers:String = serde_json::to_string(&j)?;
+//     println!("serialize {}",pers);
+//     Ok(())
+// }
+//========================
+
+
+
+/// If the directory already exists -- nothing happens..OK
