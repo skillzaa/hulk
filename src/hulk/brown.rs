@@ -119,6 +119,7 @@ pub trait Brown {
     }
     Some(true)
 }
+
   fn write_to_file(&self,file_name:&str,content:&str) -> std::io::Result<()> {
   let mut f = std::fs::OpenOptions::new().write(true).open(file_name)?;
   f.write(content.as_bytes())?;
@@ -448,12 +449,3 @@ footer
 
 }//final bracket
  
-
-struct B{}
-impl Brown for B{}
-
-impl B {
-  fn new()->B{
-    B {}
-  }
-}
