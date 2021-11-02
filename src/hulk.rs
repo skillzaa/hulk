@@ -25,8 +25,8 @@ pub fn help(){
   println!("Help");
   println!("====");
   println!("Please use following commands");
-  println!("To create a new project : \"cargo run init\" ");
-  println!("To generate a static site : \"cargo run gen\" ");
+  println!("To create a new project : \"hulk init\" ");
+  println!("To generate a static site : \"hulk gen\" ");
 
 }
 pub fn index(){
