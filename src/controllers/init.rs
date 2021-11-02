@@ -1,15 +1,7 @@
-use std::path::Path;
-use super::Brown;
-struct B{}
-impl Brown for B{}
-impl B {
-  fn new()->B{
-    B{}
-  }
-}
+use crate::core::HulkFs;
 
 pub fn init(){
-    let b = B::new();
+    let b = HulkFs::new();
     println!("initialization Hulk folder....");
 
     let folders_paths_list = vec!
@@ -26,7 +18,7 @@ pub fn init(){
     // "./hulkfolder/templates" ,
     ];
 
-    check_n_create_folders(folders_paths_list);
+    b.check_n_create_folders(folders_paths_list);
 
 //---- now create files
     //====header
@@ -48,20 +40,3 @@ pub fn init(){
 // b.write_to_file("./site/main.css",css_content ).unwrap();
  println!("initialization completed....!!!!!!");
 }//init ends
-
-fn check_n_create_folders (folders_paths_list:Vec<&str>)->Option<bool>{
-    let b = B::new();
-
-    for item in &folders_paths_list {
-        let data_folder_path = Path::new(item);
-        let data_folder_exists = data_folder_path.exists();
-        if !data_folder_exists {
-            b.create_dir(item).unwrap();
-            println!("folder created:: {}",item.to_string());
-        }else {
-            println!("folder aleady exists:: {}",item.to_string());            
-        }
-    }
-    Some(true)
-}
-

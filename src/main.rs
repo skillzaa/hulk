@@ -1,5 +1,6 @@
 use std::env;
-mod hulk;
+mod controllers;
+mod core;
 
 fn main() {
   println!("                                                  ");
@@ -16,15 +17,15 @@ fn main() {
     Some(value)=>{
       let v = value.as_str();
         match v {
-          "gen" => {hulk::gen();hulk::index()},
-          "init" => hulk::init(),
-          // "index" => hulk::index(),
-          "help" => hulk::help(),
+          "gen" => {controllers::gen();controllers::index()},
+         "init" => controllers::init(),
+          "index" => controllers::index(),
+          "help" => controllers::help(),
           _ => println!("Command not found ==> {}", v),
         }
       
     },
-    None => {hulk::help()},
+    None => {controllers::help()},
   }
   
   println!("================== HULK ENDS ======================= ");
