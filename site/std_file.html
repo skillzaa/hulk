@@ -1,0 +1,89 @@
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hulk</title>    
+<link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    
+    <header id="header">
+	<nav class="links" style="--items: 1;">
+		<a href="./index.html">Home</a>
+		<span class="line"></span>
+	</nav>
+</header>
+    <h1>std::File</h1>
+<h3>Definition</h3>
+<hr />
+<blockquote>
+<p>A reference to an open file on the filesystem.</p>
+</blockquote>
+<h2>An instance of a File can be read and/or written depending on what options it was opened with. Files also implement Seek to alter the logical cursor that the file contains internally.</h2>
+<p>A simple example from rust docs, little improved.
+<strong>we do not need the ./ in the begining of the path</strong></p>
+<pre><code class="language-rust">use std::fs::File;
+
+fn main() -&gt; std::io::Result&lt;()&gt; {
+    let f = File::create(&quot;./foo.txt&quot;)?;
+    Ok(())
+}
+</code></pre>
+<h2>If a file with the same name is already present there then that file will be over written. <strong>use with caution</strong></h2>
+<p>If we give it a path in which some folders are non existing then it will just give an error and quit.</p>
+<pre><code class="language-rust">    let f = File::create(&quot;./folder/foo.txt&quot;)?;
+</code></pre>
+<hr />
+<p>When the documentation says &quot;path does not exist&quot; it can mean any missing folder or missing file.</p>
+<p>One of the basic modules in rust std library is <strong>std::io</strong>. The main meat of io module are <strong>Write</strong> and <strong>Read</strong> traits.</p>
+<p>Because they are traits, Read and Write are implemented by a number of other types, and you can implement them for your types too.</p>
+<p>Read and Write are so important, implementors of the two traits have a nickname: readers and writers. So you’ll sometimes see ‘a reader’ instead of ‘a type that implements the Read trait’. Much easier!</p>
+<p>Beyond that, there are two important traits that are provided: Seek and BufRead. Both of these build on top of a reader to control how the reading happens. Seek lets you control where the next byte is coming from</p>
+<h2>std::io::BufReader</h2>
+<p>Adds buffering to any reader</p>
+<p>BufReader<!-- raw HTML omitted --> can improve the speed of programs that make small and repeated read calls to the same file or network socket. It does not help when reading very large amounts at once, or reading just one or a few times. It also provides no advantage when reading from a source that is already in memory, like a Vec<!-- raw HTML omitted -->.</p>
+<p>Example</p>
+<pre><code class="language-rust">use std::io::prelude::*;
+use std::io::BufReader;
+use std::fs::File;
+
+fn main() -&gt; std::io::Result&lt;()&gt; {
+    let f:File = File::open(&quot;foo.txt&quot;)?;
+    let mut reader = BufReader::new(f);
+
+    let mut line = String::new();
+    let len = reader.read_line(&amp;mut line)?;
+    println!(&quot;First line is {} bytes long&quot;, len);
+    Ok(())
+}
+</code></pre>
+<p>Note these:</p>
+<ul>
+<li>b&quot;...&quot;	Byte string literal; constructs a [u8] instead of a string.</li>
+<li>b'...'	ASCII byte literal</li>
+</ul>
+<hr />
+<p><a href="https://doc.rust-lang.org/book/appendix-02-operators.html">Rust Operators</a></p>
+<h2>Reading a File Line By Line</h2>
+<pre><code class="language-rust">use std::io;
+use std::io::prelude::*;
+use std::io::BufReader;
+use std::fs::File;
+
+fn main() -&gt; io::Result&lt;()&gt; {
+    let f = File::open(&quot;foo.txt&quot;)?;
+    let reader = BufReader::new(f);
+
+    for line in reader.lines() {
+        println!(&quot;{}&quot;, line?);
+    }
+    Ok(())
+}
+</code></pre>
+
+    </body>
+</html>
+    

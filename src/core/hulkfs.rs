@@ -1,7 +1,6 @@
-
 use std::fs;
 use std::fs::{File,DirEntry};
-use comrak::{markdown_to_html, ComrakOptions};
+//use comrak::{markdown_to_html, ComrakOptions};
 use std::path::Path;
 use std::io::Write;
 
@@ -59,8 +58,7 @@ impl HulkFs {
     v
   }
   pub fn check_n_create_folders (&self,folders_paths_list:Vec<&str>)->Option<bool>{
-    
-    for item in &folders_paths_list {
+    for item in folders_paths_list {
         let data_folder_path = Path::new(item);
         let data_folder_exists = data_folder_path.exists();
         if !data_folder_exists {

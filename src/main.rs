@@ -3,6 +3,7 @@ mod controllers;
 mod core;
 
 fn main() {
+  controllers::init();
   println!("                                                  ");
   println!("                                                  ");
   println!("================== HULK ======================= ");

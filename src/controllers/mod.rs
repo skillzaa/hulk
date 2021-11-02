@@ -4,7 +4,7 @@ mod index;
 mod init;
 
 pub fn init(){
- //init::init(); 
+ init::init(); 
  
 }
 

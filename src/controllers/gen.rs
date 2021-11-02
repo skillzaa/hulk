@@ -9,8 +9,6 @@ pub fn gen(){
     let header = get_default_header();
     let footer = get_default_footer();
   
-    // let footer = fs::read_to_string("./hulkfolder/themes/default/footer.html").unwrap();
-  
     let all_files = h.get_files_from_dir("./data");
    //===== the loop ===== 
     for entry in all_files.iter(){

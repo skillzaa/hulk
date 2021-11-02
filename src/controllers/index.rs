@@ -13,7 +13,7 @@ pub fn index(){
     let ans = b.get_files_by_ext("./site", "html");
       for entry in ans{
         let path = entry.path();
-        let path_str = path.as_path().to_str().map(|s| s.to_string()).unwrap(); 
+        // let path_str = path.as_path().to_str().map(|s| s.to_string()).unwrap(); 
         let file_name = path.file_name().unwrap();
         let file_name_str = file_name.to_str().map(|s| s.to_string()).unwrap(); 
         //------------ templating ---------------------------
