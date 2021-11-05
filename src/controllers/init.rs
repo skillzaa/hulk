@@ -1,15 +1,6 @@
-use brown::Brown;
-
-struct Bro { }
-impl Bro {
-    fn new()->Bro{
-        Bro {}
-    }
-}
-impl Brown for Bro {}
+use super::super::brown;
 
 pub fn init(){
-    let bro = Bro::new();
     println!("initialization Hulk folder....");
 
     let folders_paths_list = vec!
@@ -26,6 +17,7 @@ pub fn init(){
     // "./hulkfolder/templates" ,
     ];
 
-    bro.check_n_create_folders(folders_paths_list);
+    //let folder_exists = brown::path_exists(value)
+    brown::check_n_create_folders(folders_paths_list);
  println!("initialization completed....!!!!!!");
 }//init ends

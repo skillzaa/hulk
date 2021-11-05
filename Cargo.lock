@@ -86,12 +86,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "brown"
-version = "0.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1c39c5e697607c5a825c3772808ef8c69689c3a9eafc5214c59936a9b2f9652c"
-
-[[package]]
 name = "byte-tools"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -267,7 +261,6 @@ dependencies = [
 name = "hulk"
 version = "0.1.4"
 dependencies = [
- "brown",
  "comrak",
 ]
 

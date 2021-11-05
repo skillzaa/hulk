@@ -1,21 +1,13 @@
-use brown::Brown;
+use super::super::brown;
 use crate::core::{get_default_footer,get_default_header, get_default_nav };
-struct Bro { }
-impl Bro {
-    fn new()->Bro{
-        Bro {}
-    }
-}
-impl Brown for Bro {}
 
 pub fn index(){
-    let bro = Bro::new();
     let mut html = String::new();
     html.push_str(get_default_header());
     html.push_str(get_default_nav());
     html.push_str("<h1>Home Page</h1><br/><hr/>");
     
-    let ans = bro.get_files_by_ext("./site", "html").expect("failed to get files by extention");
+    let ans = brown::get_files_by_ext("./site", "html").expect("failed to get files by extention");
     
       for entry in ans{
         
@@ -31,8 +23,8 @@ pub fn index(){
       html.push_str(get_default_footer());
   
   //======================================
-  bro.create_file("./site/index.html");
+  brown::create_file("./site/index.html");
   
-  bro.write_to_file("./site/index.html",&html ).unwrap();
+  brown::write_to_file("./site/index.html",&html ).unwrap();
   
   }

@@ -2,23 +2,15 @@ use crate::core::{get_default_footer,get_default_header,get_default_nav,get_dark
 use comrak::{markdown_to_html, ComrakOptions};
 use std::fs;
 use std::path::Path;
-use brown::Brown;
-struct Bro { }
-impl Bro {
-    fn new()->Bro{
-        Bro {}
-    }
-}
-impl Brown for Bro {}
+use super::super::brown;
 
 pub fn gen(){
 
-    let bro = Bro::new();
 
     let header = get_default_header();
     let footer = get_default_footer();
   
-    let all_files = bro.get_files_from_dir("./data");
+    let all_files = brown::get_files_from_dir("./data");
    //===== the loop ===== 
     for entry in all_files.iter(){
     
@@ -53,7 +45,7 @@ pub fn gen(){
       //==============================
     }
     let write_path_css = Path::new("./site/main.css");
-    bro.create_file(write_path_css.to_str().unwrap());
+    brown::create_file(write_path_css.to_str().unwrap());
     let css = get_dark_css();
             fs::write(write_path_css, css).unwrap();
       println!("Markdown to Html conversion complete......");
