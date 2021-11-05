@@ -1,15 +1,24 @@
-use crate::core::HulkFs;
 use crate::core::{get_default_footer,get_default_header,get_default_nav,get_dark_css};
 use comrak::{markdown_to_html, ComrakOptions};
 use std::fs;
 use std::path::Path;
+use brown::Brown;
+struct Bro { }
+impl Bro {
+    fn new()->Bro{
+        Bro {}
+    }
+}
+impl Brown for Bro {}
 
 pub fn gen(){
-    let h = HulkFs::new();
+
+    let bro = Bro::new();
+
     let header = get_default_header();
     let footer = get_default_footer();
   
-    let all_files = h.get_files_from_dir("./data");
+    let all_files = bro.get_files_from_dir("./data");
    //===== the loop ===== 
     for entry in all_files.iter(){
     
@@ -24,14 +33,11 @@ pub fn gen(){
           page.push_str(&html);
           page.push_str(&footer);
       //==============================
-        //let path_str = path.to_str().map(|s| s.to_string()).unwrap();
         let file_name = path.file_name().unwrap();
         let file_name_str = file_name.to_str().map(|s| s.to_string()).unwrap();
         let len = file_name_str.len();
         let ext = &file_name_str[len-3..];
         let file_wo_ext = &file_name_str[0..len-3];
-        
-        //println!("file_name_str::{:?}",file_name_str);
         
         if let ".md" = &*ext {
         //    println!("ext::{:?}",ext);
@@ -47,10 +53,10 @@ pub fn gen(){
       //==============================
     }
     let write_path_css = Path::new("./site/main.css");
-    h.create_file(write_path_css.to_str().unwrap());
+    bro.create_file(write_path_css.to_str().unwrap());
     let css = get_dark_css();
             fs::write(write_path_css, css).unwrap();
-      println!("All files moved......");
+      println!("Markdown to Html conversion complete......");
   
     
   }

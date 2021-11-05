@@ -1,7 +1,15 @@
-use crate::core::HulkFs;
+use brown::Brown;
+
+struct Bro { }
+impl Bro {
+    fn new()->Bro{
+        Bro {}
+    }
+}
+impl Brown for Bro {}
 
 pub fn init(){
-    let b = HulkFs::new();
+    let bro = Bro::new();
     println!("initialization Hulk folder....");
 
     let folders_paths_list = vec!
@@ -18,6 +26,6 @@ pub fn init(){
     // "./hulkfolder/templates" ,
     ];
 
-    b.check_n_create_folders(folders_paths_list);
+    bro.check_n_create_folders(folders_paths_list);
  println!("initialization completed....!!!!!!");
 }//init ends
