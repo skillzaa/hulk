@@ -89,16 +89,26 @@ use std::io::{Error, ErrorKind};
   //   }
   //   Ok(v)
   // }
-  pub fn get_files_by_ext(dir_name:&str,ext:&str)->Option<Vec<Result<&DirEntry,Error>>>{
+  pub fn get_files_by_ext(dir_name:&str,ext:&str)->Option<Vec<DirEntry>>{
+    let mut v = Vec::new();
     let all_files = fs::read_dir(dir_name).expect("failed to open directory");
-      let mut v:Vec<Result<DirEntry,Error>> = Vec::new();
-      for file in all_files {
-        let file_path = direntry_to_path_buf(&file)?;
-        let file_ext = path_ext(&file_path)?;
-            if &*ext == file_ext {
-                v.push(file)
-            }
-      }
+      for direntry in all_files {
+        match direntry.unwrap() {
+          entry=>{
+                    let p = entry.path().as_path();
+                    let e  = path_ext(p);
+                        match e {
+                          Some(e)=>{
+                            if e == &*ext{
+                                v.push(entry);
+                            }
+                          },
+                          None=> continue,
+                        } 
+          },
+          _=> continue,
+        }  
+      }  
     Some(v)
   }
   pub fn path_exists( value:&str)->bool{
@@ -127,7 +137,7 @@ use std::io::{Error, ErrorKind};
   }
   
   
-  pub fn unwrap_direntry(direntry:Result<&DirEntry,Error>)->Option<&DirEntry>{
+  pub fn unwrap_direntry(direntry:Result<DirEntry,Error>)->Option<DirEntry>{
     let unwrapped = direntry;
     match unwrapped {
       Ok(direntry_final)=>{return Some(direntry_final)},
@@ -151,7 +161,7 @@ use std::io::{Error, ErrorKind};
       None=> return None,
     }
   } 
-  pub fn direntry_to_path_buf(direntry:Result<&DirEntry,Error>)->Option<&PathBuf>{
+  pub fn direntry_to_path_buf(direntry:Result<DirEntry,Error>)->Option<&'static PathBuf>{
     let direntry = unwrap_direntry(direntry)?;
     let file_path_buf = direntry.path();
     Some(&file_path_buf)

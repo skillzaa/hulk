@@ -11,9 +11,9 @@ pub fn index()->Option<bool>{
     
       for direntry in ans{
         
-        let path = brown::direntry_to_path_buf(direntry)?;
+       // let path = brown::direntry_to_path_buf(direntry)?;
         
-        let file_name = path.file_name().unwrap();
+        let file_name = direntry.file_name();
         let file_name_str = file_name.to_str().map(|s| s.to_string()).unwrap(); 
         //------------ templating ---------------------------
         html.push_str("<tr>");
