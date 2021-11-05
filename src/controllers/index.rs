@@ -1,7 +1,7 @@
 use super::super::brown;
 use crate::core::{get_default_footer,get_default_header, get_default_nav };
 
-pub fn index(){
+pub fn index()->Option<bool>{
     let mut html = String::new();
     html.push_str(get_default_header());
     html.push_str(get_default_nav());
@@ -9,16 +9,23 @@ pub fn index(){
     
     let ans = brown::get_files_by_ext("./site", "html").expect("failed to get files by extention");
     
-      for entry in ans{
+      for direntry in ans{
         
-        let path = entry.path();
+        let path = brown::direntry_to_path_buf(direntry)?;
         
         let file_name = path.file_name().unwrap();
         let file_name_str = file_name.to_str().map(|s| s.to_string()).unwrap(); 
         //------------ templating ---------------------------
-       let ht = format!("<a href=\"./{}\">{}</a> <br/>",file_name_str,file_name_str);
-        //--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        html.push_str(&ht);
+        html.push_str("<tr>");
+       
+        let name = format!("<td><a href=\"./{}\">{}</a> </td>",file_name_str,file_name_str);
+       html.push_str(&name);
+       
+       let link = format!("<td><a href=\"./{}\">{}</a> </td>",file_name_str,file_name_str);
+       html.push_str(&link);
+       
+       html.push_str("</tr>");
+       
       }
       html.push_str(get_default_footer());
   
@@ -26,5 +33,5 @@ pub fn index(){
   brown::create_file("./site/index.html");
   
   brown::write_to_file("./site/index.html",&html ).unwrap();
-  
+  Some(true)
   }

@@ -3,7 +3,8 @@ mod controllers;
 mod core;
 mod brown;
 fn main() {
-  controllers::init();
+  // controllers::init();
+  controllers::index();
   println!("                                                  ");
   println!("                                                  ");
   println!("================== HULK ======================= ");

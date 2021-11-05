@@ -1,0 +1,47 @@
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hulk</title>    
+<link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    
+    <header id="header">
+	<nav class="links" style="--items: 1;">
+		<a href="./index.html">Home</a>
+		<span class="line"></span>
+	</nav>
+</header>
+    <h1>Thread Sleep</h1>
+<p>This is Test function using thread sleep. We can put a thread to sleep in test functions or in other code.</p>
+<pre><code class="language-rust">use playhead::PlayHead;
+use std::{thread, time};
+
+#[test]
+fn seq(){
+    let mut ph = PlayHead::new();
+    ph.play();
+    let time_one = ph.time();
+
+    let delay = time::Duration::from_millis(2000);
+    thread::sleep(delay);
+    
+    let time_two = ph.time();
+    //==========================
+    ph.pause();
+    thread::sleep(delay);
+    let time_three = ph.time();
+
+    assert!(time_two &gt; time_one);
+    assert_eq!(time_two, time_three);
+    // println!(&quot;Time after sleep=====&gt; {:?}&quot;,time_two - time_one);
+}//fn
+</code></pre>
+
+    </body>
+</html>
+    

@@ -1,0 +1,31 @@
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hulk</title>    
+<link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    
+    <header id="header">
+	<nav class="links" style="--items: 1;">
+		<a href="./index.html">Home</a>
+		<span class="line"></span>
+	</nav>
+</header>
+    <h1>System Time / Time Stamp</h1>
+<pre><code class="language-rust">use std::time::SystemTime;
+
+fn main() {
+let time_now = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap();
+println!(&quot;Finally the time stamp::{:?} &quot;,time_now);
+
+}
+</code></pre>
+
+    </body>
+</html>
+    

@@ -1,6 +1,6 @@
 use std::{fs};
 use std::io::Write;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::fs::{DirEntry, File, ReadDir};
 use std::io::{Error, ErrorKind};
 
@@ -73,21 +73,33 @@ use std::io::{Error, ErrorKind};
         }
     v
   }
-  pub fn get_files_by_ext (dir_name:&str,ext:&str)
-  ->Result<Vec<DirEntry>,Error>{
-    let all_files = fs::read_dir(dir_name).expect("failed to open dorectory");
-    let mut v:Vec<DirEntry> = Vec::new();
-    for entry in all_files {
-        let entry = entry.expect("failed to open directory entry");
-          let path_buf = entry.path();
-            let buf_option = path_buf.extension().unwrap().to_str();
-              let buf_ext = buf_option.unwrap();
-                  if buf_ext == ext{
-                        v.push(entry);
-                  }
-
-    }
-    Ok(v)
+  // pub fn get_files_by_ext (dir_name:&str,ext:&str)
+  // ->Result<Vec<DirEntry>,Error>{
+  //   let all_files = fs::read_dir(dir_name).expect("failed to open directory");
+  //   let mut v:Vec<DirEntry> = Vec::new();
+  //   for entry in all_files {
+  //       let entry = entry.expect("failed to open directory entry");
+  //         let path_buf = entry.path();
+  //           let pth_ext = path_buf.as_path().extension().unwrap();
+  //           let pth_ext_str = pth_ext.to_str().unwrap();  
+  //         // let buf_ext = path_buf.extension().expect("get_files_by_ext").to_str().expect("get_files_by_ext");
+  //                 if &*pth_ext_str == &*ext{
+  //                       v.push(entry);
+  //                 }
+  //   }
+  //   Ok(v)
+  // }
+  pub fn get_files_by_ext(dir_name:&str,ext:&str)->Option<Vec<Result<&DirEntry,Error>>>{
+    let all_files = fs::read_dir(dir_name).expect("failed to open directory");
+      let mut v:Vec<Result<DirEntry,Error>> = Vec::new();
+      for file in all_files {
+        let file_path = direntry_to_path_buf(&file)?;
+        let file_ext = path_ext(&file_path)?;
+            if &*ext == file_ext {
+                v.push(file)
+            }
+      }
+    Some(v)
   }
   pub fn path_exists( value:&str)->bool{
     let path = std::path::Path::new(value);
@@ -112,5 +124,36 @@ use std::io::{Error, ErrorKind};
   f.write(content.as_bytes())?;
   f.flush()?;
   Ok(())
+  }
+  
+  
+  pub fn unwrap_direntry(direntry:Result<&DirEntry,Error>)->Option<&DirEntry>{
+    let unwrapped = direntry;
+    match unwrapped {
+      Ok(direntry_final)=>{return Some(direntry_final)},
+      Err(e) => return None,
+    }
+  }
+  
+  pub fn path_ext(path:&Path)->Option<String> {
+    let ext_os_str = path.extension();
+    match ext_os_str {
+      Some(some)=>{
+        let ext_str = some.to_str();
+                  match ext_str {
+                    Some(e_s)=> {
+                      let ret = String::from(e_s);
+                      return Some(ret);
+                    },
+                    None=> return None,
+                  }
+      },
+      None=> return None,
+    }
+  } 
+  pub fn direntry_to_path_buf(direntry:Result<&DirEntry,Error>)->Option<&PathBuf>{
+    let direntry = unwrap_direntry(direntry)?;
+    let file_path_buf = direntry.path();
+    Some(&file_path_buf)
   }
  

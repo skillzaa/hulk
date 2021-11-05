@@ -7,17 +7,11 @@ pub fn init(){
     [ 
     "./data", 
     "./site" ,
-    // "./site/assets", 
-    // "./site/css", 
     "./site/images", 
-    // "./hulkfolder" ,
-    // "./hulkfolder/themes" ,
-    // "./hulkfolder/themes/default" ,
-    // "./hulkfolder/themes/light" ,
-    // "./hulkfolder/templates" ,
+    "./hulkfolder" ,
+    "./hulkfolder/shortcodes" ,
     ];
 
-    //let folder_exists = brown::path_exists(value)
     brown::check_n_create_folders(folders_paths_list);
  println!("initialization completed....!!!!!!");
 }//init ends
