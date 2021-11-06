@@ -62,54 +62,13 @@ use std::io::{Error, ErrorKind};
     .filter(|x| (&x.path()).is_dir()).collect();
     v
   }
-  pub fn get_files_from_dir (dir_name:&str)->Vec<DirEntry>{
-    let mut v:Vec<DirEntry> = Vec::new();
-        for entry in fs::read_dir(dir_name).unwrap() {
-          let entry = entry.unwrap();
-          let path = entry.path();
-                if path.is_file(){
-                  v.push(entry);
-                }
-        }
-    v
-  }
-  // pub fn get_files_by_ext (dir_name:&str,ext:&str)
-  // ->Result<Vec<DirEntry>,Error>{
-  //   let all_files = fs::read_dir(dir_name).expect("failed to open directory");
-  //   let mut v:Vec<DirEntry> = Vec::new();
-  //   for entry in all_files {
-  //       let entry = entry.expect("failed to open directory entry");
-  //         let path_buf = entry.path();
-  //           let pth_ext = path_buf.as_path().extension().unwrap();
-  //           let pth_ext_str = pth_ext.to_str().unwrap();  
-  //         // let buf_ext = path_buf.extension().expect("get_files_by_ext").to_str().expect("get_files_by_ext");
-  //                 if &*pth_ext_str == &*ext{
-  //                       v.push(entry);
-  //                 }
-  //   }
-  //   Ok(v)
-  // }
-  pub fn get_files_by_ext(dir_name:&str,ext:&str)->Option<Vec<DirEntry>>{
-    let mut v = Vec::new();
-    let all_files = fs::read_dir(dir_name).expect("failed to open directory");
-      for direntry in all_files {
-        match direntry.unwrap() {
-          entry=>{
-                    let p = entry.path().as_path();
-                    let e  = path_ext(p);
-                        match e {
-                          Some(e)=>{
-                            if e == &*ext{
-                                v.push(entry);
-                            }
-                          },
-                          None=> continue,
-                        } 
-          },
-          _=> continue,
-        }  
-      }  
-    Some(v)
+  
+  pub fn get_files_from_dir(dir_name:&str)->Option<Vec<DirEntry>>{
+    let all = fs::read_dir(dir_name).unwrap();
+      let v = 
+    all.map(|x|x.unwrap())
+    .filter(|x| (&x.path()).is_file()).collect();
+  Some(v)
   }
   pub fn path_exists( value:&str)->bool{
     let path = std::path::Path::new(value);
@@ -135,8 +94,6 @@ use std::io::{Error, ErrorKind};
   f.flush()?;
   Ok(())
   }
-  
-  
   pub fn unwrap_direntry(direntry:Result<DirEntry,Error>)->Option<DirEntry>{
     let unwrapped = direntry;
     match unwrapped {
@@ -161,9 +118,4 @@ use std::io::{Error, ErrorKind};
       None=> return None,
     }
   } 
-  pub fn direntry_to_path_buf(direntry:Result<DirEntry,Error>)->Option<&'static PathBuf>{
-    let direntry = unwrap_direntry(direntry)?;
-    let file_path_buf = direntry.path();
-    Some(&file_path_buf)
-  }
- 
+  

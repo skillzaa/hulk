@@ -1,5 +1,5 @@
 use super::super::brown;
-use crate::core::{get_default_footer,get_default_header, get_default_nav };
+use crate::core::*;
 
 pub fn index()->Option<bool>{
     let mut html = String::new();
@@ -7,7 +7,7 @@ pub fn index()->Option<bool>{
     html.push_str(get_default_nav());
     html.push_str("<h1>Home Page</h1><br/><hr/>");
     
-    let ans = brown::get_files_by_ext("./site", "html").expect("failed to get files by extention");
+    let ans = get_files_by_ext("./site", "html").expect("failed to get files by extention");
     
       for direntry in ans{
         

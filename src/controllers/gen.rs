@@ -4,13 +4,10 @@ use std::fs;
 use std::path::Path;
 use super::super::brown;
 
-pub fn gen(){
-
-
-    let header = get_default_header();
-    let footer = get_default_footer();
-  
-    let all_files = brown::get_files_from_dir("./data");
+pub fn gen()->Option<bool>{
+let header = get_default_header();
+let footer = get_default_footer();
+let all_files = brown::get_files_from_dir("./data")?;
    //===== the loop ===== 
     for entry in all_files.iter(){
     
@@ -50,5 +47,5 @@ pub fn gen(){
             fs::write(write_path_css, css).unwrap();
       println!("Markdown to Html conversion complete......");
   
-    
+   Some(true)
   }
