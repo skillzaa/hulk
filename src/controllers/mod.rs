@@ -1,6 +1,6 @@
 mod gen;
 mod help;
-mod index;
+//mod index;
 mod init;
 
 pub fn init(){
@@ -15,6 +15,6 @@ pub fn gen(){
 pub fn help(){
 help::help();
 }
-pub fn index(){
-index::index();
-}
+// pub fn index(){
+// index::index();
+// }

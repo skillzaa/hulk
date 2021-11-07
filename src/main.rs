@@ -1,10 +1,11 @@
 use std::env;
 mod controllers;
+mod index;
 mod core;
-mod brown;
+use brown::Hdir;
+
 fn main() {
   // controllers::init();
-  // controllers::index();
   println!("                                                  ");
   println!("                                                  ");
   println!("================== HULK ======================= ");
@@ -19,9 +20,18 @@ fn main() {
     Some(value)=>{
       let v = value.as_str();
         match v {
-          "gen" => {controllers::gen();controllers::index()},
+          "gen" => {controllers::gen()},
          "init" => controllers::init(),
-          "index" => controllers::index(),
+          "index" => {
+                      let r = index::index();
+                      match r {
+                        Ok(r)=>{
+                            println!("index generated successfully");
+                            
+                        },
+                        Err(e)=> println!("{:?}",&e),
+                      }
+                    },
           "help" => controllers::help(),
           _ => println!("Command not found ==> {}", v),
         }
