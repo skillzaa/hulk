@@ -3,7 +3,7 @@ name = "hulk"
 version = "0.1.5"
 edition = "2021"
 authors = ["bilal <skillzaa.com@gmail.com>"]
-description = "Rust Task Runner"
+description = "An ultra simple Static site generator. Designed for Technical as well as non Technical users in mind."
 
 repository = "https://github.com/skillzaa/hulk.git"
 
