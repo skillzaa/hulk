@@ -2,10 +2,10 @@ use std::env;
 mod controllers;
 mod index;
 mod core;
-use brown::Hdir;
+use brown::Hdir; //for controllers main.rs does not need it 
 
 fn main() {
-  // controllers::init();
+  index::index();
   println!("                                                  ");
   println!("                                                  ");
   println!("================== HULK ======================= ");
