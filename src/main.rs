@@ -1,11 +1,12 @@
 use std::env;
 mod controllers;
 mod index;
+mod gen;
 mod core;
 use brown::Hdir; //for controllers main.rs does not need it 
 
 fn main() {
-  index::index();
+  // index::index();
   println!("                                                  ");
   println!("                                                  ");
   println!("================== HULK ======================= ");
@@ -20,12 +21,15 @@ fn main() {
     Some(value)=>{
       let v = value.as_str();
         match v {
-          "gen" => {controllers::gen()},
+          "gen" => {
+            let _ = gen::gen();
+            let _ = index::index(); //waoooo!!!!!!!
+          },
          "init" => controllers::init(),
           "index" => {
                       let r = index::index();
                       match r {
-                        Ok(r)=>{
+                        Ok(_r)=>{
                             println!("index generated successfully");
                             
                         },
@@ -40,6 +44,7 @@ fn main() {
     None => {controllers::help()},
   }
   
+  println!("                                                  ");
   println!("================== HULK ENDS ======================= ");
   println!("                                                  ");
 

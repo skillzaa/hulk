@@ -6,7 +6,11 @@ use std::path::Path;
 
 
 pub fn index()->Result<bool,Error>{
+  
   let hdir = Hdir::new()?;  
+  //delteold index if exists
+  let _ = hdir.remove_file("./site/index.html");  
+  
   let mut html = String::new();
     html.push_str(get_default_header());
     html.push_str(get_default_nav());

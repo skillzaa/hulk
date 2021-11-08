@@ -3,7 +3,7 @@
 ---
 > Hulk is an **ultra simple** static site generator designed to appeal to both technical and non technical users.
 
-> Hulk converts Markdown (*.md*) files (from data folder) into html files.
+> Hulk converts Markdown (*.md*) files (from ./data folder) into html files (into ./site folder).
 ---
 
 - You need to have cargo installed. Its installation is very simple on windows as well and linex systems.
@@ -13,7 +13,8 @@
 ---
 
 ### Installation
-At the moment this application is just available on cargo. To install you have to type into terminal **cargo install hulk**
+At the moment this application is just available on cargo. 
+To install you have to type into terminal **cargo install hulk**
 
 > cargo install hulk
 
@@ -32,7 +33,7 @@ At the moment this application is just available on cargo. To install you have t
 
 > hulk init
 
-- Once you have created few mark-down files in data folder you can type into terminal **hulk gen** and the static site will be generated in **site** folder.
+- Once you have created few mark-down files in the ./data folder you can type into terminal **hulk gen** and the static site will be generated in **site** folder.
 
 > hulk gen
 
@@ -47,3 +48,8 @@ You help, support, guidance and suggestions are expected and desired.
 
 ---
 **Please do report bugs and suggestions here [https://github.com/skillzaa/hulk/issues](https://github.com/skillzaa/hulk/issues)**
+
+## Release Notes
+
+### Version 0.1.5
+A lot has changed internally but on the surface it remains the same. ** The API is not mature and is likelyto change and I expect a lot of errors**. So at the moment this project is good for any one to join in and be part of.

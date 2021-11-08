@@ -1,4 +1,3 @@
-mod gen;
 mod help;
 //mod index;
 mod init;
@@ -8,9 +7,6 @@ pub fn init(){
  
 }
 
-pub fn gen(){
- gen::gen();
-}
 
 pub fn help(){
 help::help();

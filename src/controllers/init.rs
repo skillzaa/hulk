@@ -18,7 +18,7 @@ pub fn init()->Result<bool,Error>{
     for folder in folders_paths_list {
         let result = hdir.create_dir(folder);
         match result {
-            Ok(f)=>{println!("folder created :: {}",folder)},
+            Ok(_f)=>{println!("folder created :: {}",folder)},
             Err(_e)=>{
                 println!("failed to create folder :: {} , the folder may already exist",folder);
                 continue;
