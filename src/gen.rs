@@ -7,7 +7,7 @@ use std::io::{Error};
 
 
 pub fn gen()->Result<bool,Error>{
-
+let _ = bro::create_dir("./site");
 let all_md = bro::get_files_by_ext("data", "md")?;
      
     for md in all_md {
