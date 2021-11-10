@@ -1,8 +1,9 @@
 use std::env;
-mod controllers;
-mod index;
-mod init;
-mod gen;
+mod tasks;
+use tasks::gen;
+use tasks::help;
+use tasks::index;
+use tasks::init;
 mod core;
 use brown; //for controllers main.rs does not need it 
 
@@ -49,12 +50,12 @@ fn main() {
                         Err(e)=> println!("{:?}",&e),
                       } 
           },
-          "help" => controllers::help(),
+          "help" => help::help(),
           _ => println!("Command not found ==> {}", v),
         }
       
     },
-    None => {controllers::help()},
+    None => {help::help()},
   }
   
   println!("                                                  ");
