@@ -1,4 +1,4 @@
-use crate::core::{get_default_footer,get_default_header,get_default_nav,get_dark_css};
+use crate::assets::{get_default_footer,get_default_header,get_default_nav,get_dark_css};
 use comrak::{markdown_to_html, ComrakOptions};
 use std::fs::{self, DirEntry};
 use std::path::Path;

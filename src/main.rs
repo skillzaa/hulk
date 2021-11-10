@@ -4,7 +4,7 @@ use tasks::gen;
 use tasks::help;
 use tasks::index;
 use tasks::init;
-mod core;
+mod assets;
 use brown; //for controllers main.rs does not need it 
 
 fn main() {
