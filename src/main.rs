@@ -30,21 +30,25 @@ fn main() {
                         },
                         Err(e)=> println!("{:?}",&e),
                       }
-            //let _ = index::index(); //waoooo!!!!!!!
+                  let r = index::index();
+                  match r {
+                    Ok(_r)=>{
+                        println!("index generated successfully");
+                        
+                    },
+                    Err(e)=> println!("{:?}",&e),
+                  }
           },
-         "init" => {//init::init()
-        
-          },
-          "index" => {
-                      let r = index::index();
-                      match r {
+         "init" => {
+          let init_result = init::init();
+                      match init_result {
                         Ok(_r)=>{
-                            println!("index generated successfully");
+                            println!("Project initialized....");
                             
                         },
                         Err(e)=> println!("{:?}",&e),
-                      }
-                    },
+                      } 
+          },
           "help" => controllers::help(),
           _ => println!("Command not found ==> {}", v),
         }

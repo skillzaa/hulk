@@ -24,9 +24,12 @@ pub fn index()->Result<bool,Error>{
         
         let file_name = bro::get_file_name(&file)?;
         
-        //let link = file.path().as_path().to_str()?;
+        let file_name_readable = 
+        replace_char(&file_name, '_', ' ');
+        let mut link = String::from(&file_name);
+        link.push_str(".html");
                       
-        let  anchor= format!("<a href= \"{}\">{}</a>","lll",&file_name);
+        let  anchor= format!("<a href= \"{}\">{}</a>",&link,&file_name_readable);
         
         html.push_str(&anchor);
         html.push_str("</td></tr>");
