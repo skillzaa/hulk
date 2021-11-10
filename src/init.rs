@@ -1,8 +1,7 @@
 use std::io::{Error};
-use brown::Hdir;
+use brown as bro;
 
 pub fn init()->Result<bool,Error>{
-    let hdir = Hdir::new()?;
     println!("initialization Hulk folder....");
 
     let folders_paths_list = vec!
@@ -16,7 +15,7 @@ pub fn init()->Result<bool,Error>{
     ];
 
     for folder in folders_paths_list {
-        let result = hdir.create_dir(folder);
+        let result = bro::create_dir(folder);
         match result {
             Ok(_f)=>{println!("folder created :: {}",folder)},
             Err(_e)=>{

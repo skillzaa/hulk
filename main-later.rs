@@ -7,6 +7,8 @@ mod core;
 use brown; //for controllers main.rs does not need it 
 
 fn main() {
+  // gen::gen();
+  return;
   println!("                                                  ");
   println!("                                                  ");
   println!("================== HULK ======================= ");

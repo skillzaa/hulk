@@ -87,9 +87,9 @@ dependencies = [
 
 [[package]]
 name = "brown"
-version = "0.0.5"
+version = "0.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "784027f630651c91ac229caa3d10fbb2c780dcd81ad650691968a5561a7afb42"
+checksum = "18d01a50f262b6977b0316bffd5ce1438e8ec19d00fab0e4b1ad33f34fd53ed0"
 
 [[package]]
 name = "byte-tools"

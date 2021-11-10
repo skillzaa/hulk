@@ -1,15 +1,14 @@
 use std::fs;
 use crate::core::*;
-use brown::Hdir;
+use brown as bro;
 use std::io::{Error};
 use std::path::Path;
 
 
 pub fn index()->Result<bool,Error>{
   
-  let hdir = Hdir::new()?;  
   //delteold index if exists
-  let _ = hdir.remove_file("./site/index.html");  
+  let _ = bro::remove_file("./site/index.html");  
   
   let mut html = String::new();
     html.push_str(get_default_header());
@@ -17,21 +16,17 @@ pub fn index()->Result<bool,Error>{
     html.push_str("<h1>Home Page</h1><br/><hr/>");
     html.push_str("<table>");
     html.push_str("<tr><td>File Name</td></tr>");
-    let files = hdir.get_files_by_ext("site", "html")?;
+    let files = bro::get_files_by_ext("site", "html")?;
     
       for file in files {
-        let path_buf = file.path();
         //------------ templating ---------------------------
         html.push_str("<tr><td>");
         
-        let pth = path_buf.as_path();
-        let file_name = get_file_name(pth);
-        let file_name_human = replace_char(&file_name, '_', ' ');
+        let file_name = bro::get_file_name(&file)?;
         
-        let link = path_buf.as_path().file_name().unwrap().to_str().unwrap();
-
-              
-        let  anchor= format!("<a href= \"{}\">{}</a>",link,&file_name_human);
+        //let link = file.path().as_path().to_str()?;
+                      
+        let  anchor= format!("<a href= \"{}\">{}</a>","lll",&file_name);
         
         html.push_str(&anchor);
         html.push_str("</td></tr>");
@@ -43,7 +38,7 @@ pub fn index()->Result<bool,Error>{
         //println!("{}",&html);
         //This is safe file creation we need create in any case
         fs::File::create("./site/index.html")?;
-        //hdir.create_file("./site/index.html")?;
+        //bro::create_file("./site/index.html")?;
         let res = std::fs::write("./site/index.html", &html);
         match res {
           Ok(_r)=> return Ok(true),
