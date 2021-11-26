@@ -3,27 +3,19 @@ use brown as bro;
 
 pub fn init()->Result<bool,Error>{
     println!("initialization Hulk folder....");
-
     let folders_paths_list = vec!
     [ 
-    "data", 
-    "site" ,
-    "site/images", 
-    "hulkfolder" ,
-    "hulkfolder/templates" ,
-    "hulkfolder/config" ,
+        "site" ,
+        "site/images", 
+        "hulkfolder" ,
+        "hulkfolder/templates" ,
+        "hulkfolder/config" ,
+        "data", 
     ];
-
-    for folder in folders_paths_list {
-        let result = bro::create_dir(folder);
-        match result {
-            Ok(_f)=>{println!("folder created :: {}",folder)},
-            Err(_e)=>{
-                println!("failed to create folder :: {} , the folder may already exist",folder);
-                continue;
-            },
-        }
-    }
- println!("initialization completed....!!!!!!");
+//====================== ONE LINE MAGIC
+bro::tasks::create_dir_structure::
+run(folders_paths_list)?;
+//======================================== 
+println!("initialization completed....!!!!!!");
  Ok(true)
 }//init ends

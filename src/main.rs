@@ -8,6 +8,7 @@ mod assets;
 use brown; //for controllers main.rs does not need it 
 
 fn main() {
+  //init::init();
   println!("                                                  ");
   println!("                                                  ");
   println!("================== HULK ======================= ");

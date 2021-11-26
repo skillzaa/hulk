@@ -52,4 +52,4 @@ You help, support, guidance and suggestions are expected and desired.
 ## Release Notes
 
 ### Version 0.1.5
-A lot has changed internally but on the surface it remains the same. ** The API is not mature and is likelyto change and I expect a lot of errors**. So at the moment this project is good for any one to join in and be part of.
+A lot has changed internally but on the surface it remains the same. **The API is not mature and is likely to change and I expect a lot of errors**. So at the moment this project is good for any one to join in and be part of.

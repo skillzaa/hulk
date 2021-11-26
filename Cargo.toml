@@ -1,6 +1,6 @@
 [package]
 name = "hulk"
-version = "0.1.6"
+version = "0.1.7"
 edition = "2021"
 authors = ["bilal <skillzaa.com@gmail.com>"]
 description = "An ultra simple Static site generator. Designed for Technical as well as non Technical users in mind."
@@ -21,4 +21,4 @@ bench = false
 
 [dependencies]
 comrak = "0.12.1"
-brown = "0.0.7"
+brown = "0.1.3"
