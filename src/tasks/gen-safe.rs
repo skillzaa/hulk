@@ -6,16 +6,7 @@ use brown as bro;
 use std::io::{Error};
 
 pub fn gen()->Result<bool,Error>{
-// let _ = bro::create_dir("./site");
-let dir_struct = bro::tasks::copy_dir_structure::run("data", "site").unwrap();
-// println!("{:#?}",dir_struct);
-
-
-let dir_struct_str:Vec<&str> = dir_struct
-.iter().map(|s| &**s).collect();
-let site_struct = bro::tasks::
-create_dir_structure::run(&dir_struct_str);
-assert!(site_struct.is_ok());
+let _ = bro::create_dir("./site");
 let all_md = bro::get_files_by_ext("data", "md")?;
      
     for md in all_md {

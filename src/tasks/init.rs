@@ -14,7 +14,7 @@ pub fn init()->Result<bool,Error>{
     ];
 //====================== ONE LINE MAGIC
 bro::tasks::create_dir_structure::
-run(folders_paths_list)?;
+run(&folders_paths_list)?;
 //======================================== 
 println!("initialization completed....!!!!!!");
  Ok(true)
