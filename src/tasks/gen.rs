@@ -1,5 +1,4 @@
 use crate::assets::{get_default_footer,get_default_header,get_default_nav,get_dark_css};
-use crate::Generator;
 use comrak::{markdown_to_html, ComrakOptions};
 use std::fs::{self, DirEntry};
 use std::path::Path;
@@ -7,11 +6,7 @@ use brown as bro;
 use std::io::{Error};
 
 pub fn gen()->Result<bool,Error>{
-  let generator = Generator::
-  new("data".to_string(), 
-  "site".to_string());
-  generator.create_site_dir();
-
+let _ = bro::create_dir("./site");
 let all_md = bro::get_files_by_ext("data", "md")?;
      
     for md in all_md {

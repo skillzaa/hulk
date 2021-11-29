@@ -1,11 +1,7 @@
 use std::env;
 mod tasks;
-mod generator;
-use generator::Generator;
-use tasks::gen;
-use tasks::help;
-use tasks::index;
-use tasks::init;
+mod site_gen;
+use tasks::{gen,help,index,init};
 mod assets;
 use brown; //for controllers main.rs does not need it 
 
