@@ -5,7 +5,6 @@ use std::path::Path;
 use brown as bro;
 use std::io::{Error};
 
-
 pub fn gen()->Result<bool,Error>{
 let _ = bro::create_dir("./site");
 let all_md = bro::get_files_by_ext("data", "md")?;
@@ -57,7 +56,6 @@ fn md_to_html(dir_entry:&DirEntry)->Result<String,Error>{
   let html = markdown_to_html(&md, &ComrakOptions::default());
    Ok(html)    
 }
-
 pub fn gen_dark_css(){
   let write_path_css = Path::new("./site/main.css");
   let _ = bro::create_file(write_path_css.to_str().unwrap());
