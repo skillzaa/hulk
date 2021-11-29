@@ -1,5 +1,7 @@
 use std::env;
 mod tasks;
+mod generator;
+use generator::Generator;
 use tasks::gen;
 use tasks::help;
 use tasks::index;
