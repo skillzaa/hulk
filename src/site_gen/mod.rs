@@ -10,11 +10,9 @@ pub fn run()->bool{
   true
 }
 
-
-
 mod tests{
 use super::*;
-#[test]
+#[test] 
 fn run_test(){
   super::run();
 }  

@@ -21,4 +21,4 @@ bench = false
 
 [dependencies]
 comrak = "0.12.1"
-brown = "0.1.4"
+brown = "0.1.5"

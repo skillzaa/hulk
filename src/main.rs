@@ -1,6 +1,7 @@
 use std::env;
 mod tasks;
 mod site_gen;
+mod files_gen;
 use tasks::{gen,help,index,init};
 mod assets;
 use brown; //for controllers main.rs does not need it 
@@ -22,22 +23,22 @@ fn main() {
       let v = value.as_str();
         match v {
           "gen" => {
-            let gen_result = gen::gen();
-                      match gen_result {
-                        Ok(_r)=>{
-                            println!("Markdown to Html generation completed..");
+            // let gen_result = gen::gen();
+            //           match gen_result {
+            //             Ok(_r)=>{
+            //                 println!("Markdown to Html generation completed..");
                             
-                        },
-                        Err(e)=> println!("{:?}",&e),
-                      }
-                  let r = index::index();
-                  match r {
-                    Ok(_r)=>{
-                        println!("index generated successfully");
+            //             },
+            //             Err(e)=> println!("{:?}",&e),
+                      // }
+                  // let r = index::index();
+                  // match r {
+                  //   Ok(_r)=>{
+                  //       println!("index generated successfully");
                         
-                    },
-                    Err(e)=> println!("{:?}",&e),
-                  }
+                  //   },
+                  //   Err(e)=> println!("{:?}",&e),
+                  // }
           },
          "init" => {
           let init_result = init::init();
