@@ -87,9 +87,9 @@ dependencies = [
 
 [[package]]
 name = "brown"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5caec1f8e7673dd9a337622bfcc03ca17f9324c1413b1fd48247dcfc50b89c0e"
+checksum = "208e423812e74da8b5e026c6de3afbe0e0b384255fc8bd7076749cf40639846f"
 
 [[package]]
 name = "byte-tools"
@@ -138,6 +138,15 @@ dependencies = [
  "textwrap",
  "unicode-width",
  "vec_map",
+]
+
+[[package]]
+name = "cmake"
+version = "0.1.46"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b7b858541263efe664aead4a5209a4ae5c5d2811167d4ed4ee0944503f8d2089"
+dependencies = [
+ "cc",
 ]
 
 [[package]]
@@ -223,6 +232,45 @@ dependencies = [
 ]
 
 [[package]]
+name = "fltk"
+version = "1.2.20"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f79b7d7f79ca306c569b3f2cceec87e1efa74310ee452651497a6f5c475308af"
+dependencies = [
+ "bitflags",
+ "fltk-sys",
+ "paste",
+]
+
+[[package]]
+name = "fltk-build"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "24266753a0d6074553424e95db889a351f46416a293ae0b9512039cbbe9ab275"
+
+[[package]]
+name = "fltk-flow"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "76307d1359628e0e4940d9b7177506c64b7852e636fdee8c1da69ec658e7b359"
+dependencies = [
+ "cc",
+ "fltk",
+ "fltk-build",
+ "fltk-sys",
+ "paste",
+]
+
+[[package]]
+name = "fltk-sys"
+version = "1.2.20"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dac69ace534b95e43c5eab58004c50a3f96ba3474f4a194da1e3bf1a7a8683d6"
+dependencies = [
+ "cmake",
+]
+
+[[package]]
 name = "fnv"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -269,6 +317,8 @@ version = "0.1.7"
 dependencies = [
  "brown",
  "comrak",
+ "fltk",
+ "fltk-flow",
 ]
 
 [[package]]
@@ -388,6 +438,12 @@ name = "opaque-debug"
 version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2839e79665f131bdb5782e51f2c6c9599c133c6098982a54c794358bf432529c"
+
+[[package]]
+name = "paste"
+version = "1.0.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0744126afe1a6dd7f394cb50a716dbe086cb06e255e53d8d0185d82828358fb5"
 
 [[package]]
 name = "pest"

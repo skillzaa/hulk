@@ -1,10 +1,14 @@
 use std::env;
 mod tasks;
-mod site_gen;
-mod files_gen;
-use tasks::{gen,help,index,init};
+// mod site_gen;
+// mod files_gen;
+use tasks::{help,index,init};
+// mod gen;
+mod gui;
+// use gui::
+// use gen::gen;
 mod assets;
-use brown; //for controllers main.rs does not need it 
+use brown; 
 
 fn main() {
   //init::init();
@@ -30,7 +34,7 @@ fn main() {
                             
             //             },
             //             Err(e)=> println!("{:?}",&e),
-                      // }
+            //           }
                   // let r = index::index();
                   // match r {
                   //   Ok(_r)=>{
@@ -50,6 +54,7 @@ fn main() {
                         Err(e)=> println!("{:?}",&e),
                       } 
           },
+          "gui" => gui::gui(),
           "help" => help::help(),
           _ => println!("Command not found ==> {}", v),
         }

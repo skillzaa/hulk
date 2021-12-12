@@ -23,7 +23,7 @@ impl Generator{
     self.create_site_struct
     (site_struct)
   }
-  fn copy_site_struct(&self)->Result<Vec<String>,Error>{
+  pub fn copy_site_struct(&self)->Result<Vec<String>,Error>{
     let site_struct = bro::tasks::copy_dir_structure::run("data", "site");
     match site_struct {
     Ok(item)=>{
@@ -33,7 +33,7 @@ impl Generator{
       },
     }
   }
-  fn create_site_struct(&self,dir_struct:Vec<String>)->Result<bool,Error>{
+  pub fn create_site_struct(&self,dir_struct:Vec<String>)->Result<bool,Error>{
     let dir_struct_str = 
     dir_struct.iter().map(|s|&**s)
     .collect();

@@ -1,23 +1,30 @@
-pub fn gen()->bool{
-    true
-// let _ = bro::create_dir("./site");
-// let all_md = bro::get_files_by_ext("data", "md")?;
-     
-    // for md in all_md {
-    //   let result = static_loop(&md);
+use std::io::Error;
+use crate::site_gen;
+pub fn gen()->Result<bool,Error>{
+let site_ok = site_gen::run();
+assert!(site_ok);
+let files_ok = gen_files();
+todo!();
+}
+/*
+Step : 1 get folder struct of data folder
+step : 2 convert it into site folder urls
+step : 3 place both in same obj
+step : 4 loop picking from one and droppping into the other
+*/
+fn gen_files(){
+    
+}
 
-    //   match result {
-    //     Ok(_r)=>{
-    //       let file_name = bro::get_file_name(&md)?;
-    //       println!("......... generate html for {}",&file_name);
-    //     },
-    //     Err(_e)=>{
-    //       let file_name = bro::get_file_name(&md)?; 
-    //       println!("failed to generate html for {}",&file_name);
-    //       continue;
-    //     },
-    //   }  
-    // } 
-    // gen_dark_css();  
-//    Ok(true)
-  }
+
+mod tests {
+use super::*;
+#[test]
+fn first(){
+    let c = gen().unwrap();
+}
+
+
+
+
+}

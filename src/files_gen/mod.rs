@@ -10,11 +10,11 @@ use std::fs;
 
 #[derive(Debug)]
 pub struct FilesGen{
-  url:&'static str, 
   file:DirEntry,
+  url: String, 
 }
 impl FilesGen{
-  pub fn new(file:DirEntry, url:&'static str)->Self{
+  pub fn new(file:DirEntry, url:String)->Self{
     FilesGen {file,url,}
   }
   pub fn run(&self,dir_entry:&DirEntry)->Result<bool,Error> {
@@ -24,9 +24,18 @@ impl FilesGen{
     write_file(&file_name, &content)?;
     Ok(true)
   }
-  fn get_nav(&self)->Result<String,Error>{
+  pub fn get_file(&self)->Result<String,Error> {
+    let file_name = 
+    bro::get_file_name(&self.file)?;
+    let content = 
+    self.get_page()?;
+    Ok(content)
+  }
+  fn get_nav<'a>(&'static self)->Result<String,Error>{
+    let s: &'static str = &self.url.as_str();
+    // print_me(&owned_string);
     let n = 
-    NavBar::new(self.url);
+    NavBar::new(s);
     match n {
     Ok(item)=>{
     Ok(item.gen_navbar())
@@ -87,7 +96,7 @@ fn first(){
   let url = "data/snippets";
   // let file = files.first().unwrap().to_owned();
     for file in files {
-      let f = FilesGen::new(file,url);
+      let f = FilesGen::new(file,url.to_string());
       let n = f.get_page().unwrap();
       println!("===>{:?}",n);
 
