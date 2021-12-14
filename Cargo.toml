@@ -21,6 +21,7 @@ bench = false
 
 [dependencies]
 comrak = "0.12.1"
-brown = "0.1.6"
+brown = "0.1.8"
 fltk = "^1.2"
 fltk-flow = "0.1.2"
+yansi = "0.5.0"

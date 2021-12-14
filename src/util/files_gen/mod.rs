@@ -1,11 +1,12 @@
+use std::fs::DirEntry;
+use std::fs;
 use crate::assets::{get_default_footer,get_default_header,get_default_nav,get_dark_css};
 use comrak::{markdown_to_html, ComrakOptions};
-use std::fs::{DirEntry};
-use bro::navbar::NavBar;
+use super::NavBar;
 use std::path::Path;
+
 use brown as bro;
-use std::io::{Error};
-use std::fs;
+use bro::BrownError as Error;
 // use nav
 
 #[derive(Debug)]
@@ -31,8 +32,8 @@ impl FilesGen{
     self.get_page()?;
     Ok(content)
   }
-  fn get_nav<'a>(&'static self)->Result<String,Error>{
-    let s: &'static str = &self.url.as_str();
+  fn get_nav(&self)->Result<String,Error>{
+    let s: &str = &self.url.clone().as_str();
     // print_me(&owned_string);
     let n = 
     NavBar::new(s);
@@ -40,7 +41,7 @@ impl FilesGen{
     Ok(item)=>{
     Ok(item.gen_navbar())
     },
-    Err(_e)=>{Err(_e)},
+    Err(_e)=>{Err(Error::DirEmpty)},
     }
   }
   fn get_page(&self)->Result<String,Error>{
@@ -66,8 +67,8 @@ fn write_file(file_name:&str,content:&String)->Result<bool,Error>{
 let mut write_path_str = String::from("./site/");
 write_path_str.push_str(file_name);
 write_path_str.push_str(".html");
-let write_path = Path::new(&write_path_str);
-fs::write(write_path, content)?;
+// let write_path = Path::new(&write_path_str);
+bro::write_to_file(&write_path_str, content)?;
 Ok(true)
 }
 //................................

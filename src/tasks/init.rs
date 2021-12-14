@@ -1,6 +1,6 @@
-use std::io::{Error};
+//use std::io::{Error};
 use brown as bro;
-
+use brown::BrownError as Error;
 pub fn init()->Result<bool,Error>{
     println!("initialization Hulk folder....");
     let folders_paths_list = vec!
@@ -13,8 +13,7 @@ pub fn init()->Result<bool,Error>{
         "data", 
     ];
 //====================== ONE LINE MAGIC
-bro::tasks::create_dir_structure::
-run(&folders_paths_list)?;
+bro::create_dir_structure(&folders_paths_list)?;
 //======================================== 
 println!("initialization completed....!!!!!!");
  Ok(true)

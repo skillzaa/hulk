@@ -1,12 +1,13 @@
 use std::env;
 mod tasks;
-// mod site_gen;
-// mod files_gen;
+mod util;
+use yansi::Paint;
+
 use tasks::{help,index,init};
-// mod gen;
 mod gui;
-// use gui::
-// use gen::gen;
+// use util::
+mod generator;
+use generator::Generator;
 mod assets;
 use brown; 
 
@@ -14,7 +15,8 @@ fn main() {
   //init::init();
   println!("                                                  ");
   println!("                                                  ");
-  println!("================== HULK ======================= ");
+  let bar_top = "================== HULK =======================";
+  println!("{}",Paint::green(bar_top));
   println!("                                                  ");
   println!("                                                  ");
 
@@ -27,22 +29,22 @@ fn main() {
       let v = value.as_str();
         match v {
           "gen" => {
-            // let gen_result = gen::gen();
-            //           match gen_result {
-            //             Ok(_r)=>{
-            //                 println!("Markdown to Html generation completed..");
+            let gen_result = Generator::run();
+                      match gen_result {
+                        Ok(_r)=>{
+                            println!("Markdown to Html generation completed..");
                             
-            //             },
-            //             Err(e)=> println!("{:?}",&e),
-            //           }
-                  // let r = index::index();
-                  // match r {
-                  //   Ok(_r)=>{
-                  //       println!("index generated successfully");
+                        },
+                        Err(e)=> println!("{:?}",&e),
+                      }
+                  let r = index::index();
+                  match r {
+                    Ok(_r)=>{
+                        println!("index generated successfully");
                         
-                  //   },
-                  //   Err(e)=> println!("{:?}",&e),
-                  // }
+                    },
+                    Err(e)=> println!("{:?}",&e),
+                  }
           },
          "init" => {
           let init_result = init::init();
@@ -56,7 +58,7 @@ fn main() {
           },
           "gui" => gui::gui(),
           "help" => help::help(),
-          _ => println!("Command not found ==> {}", v),
+          _ => println!("Command not found ==> {}", Paint::red(v)),
         }
       
     },
@@ -64,7 +66,8 @@ fn main() {
   }
   
   println!("                                                  ");
-  println!("================== HULK ENDS ======================= ");
+  let bar_bot = "================== HULK ENDS ======================= "; 
+  println!("{}",Paint::green(bar_bot));
   println!("                                                  ");
 
 }//main

@@ -1,7 +1,9 @@
 use std::fs;
 use crate::assets::*;
 use brown as bro;
-use std::io::{Error};
+use brown::BrownError as Error;
+
+// use std::io::{Error};
 use std::path::Path;
 
 
@@ -40,9 +42,10 @@ pub fn index()->Result<bool,Error>{
         html.push_str(get_default_footer());
         //println!("{}",&html);
         //This is safe file creation we need create in any case
-        fs::File::create("./site/index.html")?;
+        bro::create_file_brute("./site/index.html")?;
         //bro::create_file("./site/index.html")?;
-        let res = std::fs::write("./site/index.html", &html);
+        let res = 
+        bro::write_to_file("./site/index.html", &html);
         match res {
           Ok(_r)=> return Ok(true),
           Err(e)=> return Err(e),

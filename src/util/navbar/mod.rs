@@ -2,6 +2,7 @@ use std::io::{Error};
 
 mod urltolinks;
 use urltolinks::UrlToLinks;
+
 pub struct NavBar {
     urltolinks:UrlToLinks,
 }
