@@ -87,9 +87,9 @@ dependencies = [
 
 [[package]]
 name = "brown"
-version = "0.1.8"
+version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e5ffb7cfc5ce74e75498e30d2871c1f5216700440691aa362e65afd7a197e676"
+checksum = "98ecd16f9297466a091f63b626b6af64ec931759333911e516ebb8942f62729d"
 dependencies = [
  "qndr",
  "thiserror",
