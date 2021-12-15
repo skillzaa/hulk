@@ -1,3 +1,5 @@
+use std::fs::DirEntry;
+
 use brown::*; 
 use brown::BrownError as Error;
 
@@ -14,48 +16,44 @@ let dir_struct_clean =
 get_dir_struct_clean()?;
 //---------------------------------
 // Step 03: Loop for each sub-dir
-
   for dir in dir_struct_clean{
-    let d = create_dir_brute(&dir.as_str())
-    .unwrap();
-    println!("{:?}",d);
+  
       let files = get_files(&dir).unwrap();
-      for file in files {
-        
-        let file_path = file.path();
-        // println!("{:?}",file_path);
-        
-        let content = std::fs::
-        read_to_string(&file_path).unwrap();
-        
-        let file_path_string = direntry_to_path(&file).unwrap();
-            
-        let dest = file_path_string.replacen("data", "site", 1);
-          let dest_clean = dest.replace("./","");
-          // println!("{:?}",dest_clean);
-            
-            // let dest_path = std::path::Path::
-            //   new(&dest);
-             
-             // write_to_file(&dest, &content)
-              //.unwrap();
-        // let r = std::fs::write(&dest, &content);
-      // let b = create_file(&dest_clean.as_str())
-      // .unwrap();
-      let p = std::path::Path::new(&dest_clean);
-      // println!("{:?}",p);
-  let b = 
-  create_file_brute(dest_clean.as_str())
-  .unwrap();
-      let r = write_to_file
-      (&dest_clean, &content).unwrap();
-      println!("{:?}",r);
-              
-      }
+      single_folder_files(&files);
   }
   Ok(true)
 }//run
+fn single_folder_files(files:&Vec<DirEntry>){
+for file in files {
+  
+let content = get_content(&file);  
 
+let file_path_string = direntry_to_path(&file).unwrap();
+        
+  let dest = file_path_string.replacen("data", "site", 1);
+      let dest_clean = dest.replace("./","");
+     
+      
+  let p = std::path::Path::new(&dest_clean);
+  
+  let a = create_n_write_file(dest_clean,content);  
+  println!("{:?}",a);      
+  }
+}
+fn get_content(file:&DirEntry)->String{
+  let file_path = file.path();
+  std::fs::
+    read_to_string(&file_path).unwrap()
+ 
+}
+fn create_n_write_file(dest_clean:String,content:String)->bool{
+  let _b = 
+  create_file_brute(dest_clean.as_str())
+  .unwrap();
+    let _r = write_to_file
+    (&dest_clean, &content).unwrap();
+  true
+}
 fn clone_data_to_site()->Result<Vec<String>,Error>{
 clone_dir_structure("data","site")  
 }
