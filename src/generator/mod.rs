@@ -1,13 +1,20 @@
 mod flat;
 use flat::*;
 mod non_md;
+mod assets;
 mod md;
-use non_md::non_md_files;
 use md::md_files;
+use non_md::non_md_files;
 use brown::*; 
 use brown::BrownError as Error;
 
+use self::assets::get_dark_css;
+
 pub fn run()->Result<bool,Error>{
+// Step 00: Add css file
+let _ = create_file_brute("site/main.css"); 
+let _ = write_to_file("site/main.css", 
+&get_dark_css().to_string()); 
 // Step 01: clone_data_to_site
 clone_data_to_site()?;
 // Step 02: get_dir_struct_clean
