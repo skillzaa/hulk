@@ -27,18 +27,17 @@ fn single_folder_files(files:&Vec<DirEntry>){
 for file in files {
   
 let content = get_content(&file);  
+let dest_clean = get_dest_clean(&file);
 
-let file_path_string = direntry_to_path(&file).unwrap();
-        
-  let dest = file_path_string.replacen("data", "site", 1);
-      let dest_clean = dest.replace("./","");
-     
-      
-  let p = std::path::Path::new(&dest_clean);
-  
-  let a = create_n_write_file(dest_clean,content);  
-  println!("{:?}",a);      
+let a = create_n_write_file(dest_clean,content);  
+println!("{:?}",a);
   }
+}
+fn get_dest_clean(file:&DirEntry)->String{
+let file_path_string = direntry_to_path(&file).unwrap();        
+let dest = file_path_string.replacen("data", "site", 1);
+ let d = dest.replace("./","");
+        d
 }
 fn get_content(file:&DirEntry)->String{
   let file_path = file.path();

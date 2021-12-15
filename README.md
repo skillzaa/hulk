@@ -12,7 +12,6 @@
 
 
 ---
-
 ### Installation
 At the moment this application is just available on cargo. 
 To install you have to type into terminal **cargo install hulk**
