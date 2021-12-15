@@ -17,21 +17,35 @@ get_dir_struct_clean()?;
 //---------------------------------
 // Step 03: Loop for each sub-dir
   for dir in dir_struct_clean{
-  
-      let files = get_files(&dir).unwrap();
-      single_folder_files(&files);
+  let files = get_files(&dir).unwrap();
+      
+    single_folder_files(&files);
   }
   Ok(true)
 }//run
 fn single_folder_files(files:&Vec<DirEntry>){
-for file in files {
-  
-let content = get_content(&file);  
-let dest_clean = get_dest_clean(&file);
-
-let a = create_n_write_file(dest_clean,content);  
-println!("{:?}",a);
+  for file in files {
+    let file_name = get_file_name(&file).unwrap();
+    let is_md = is_md(&file);
+    println!("{}: is_md: {:?}",file_name,is_md);
+    let content = get_content(&file);  
+    let dest_clean = get_dest_clean(&file);
+    let a = create_n_write_file(dest_clean,content);  
+    // println!("{:?}",a);
   }
+}
+fn is_md(file:&DirEntry)->bool{
+let ext = get_ext(&file);
+      match ext {
+      Ok(item)=>{
+          if item == "md"{
+            true
+          }else {
+            false
+          }
+      },
+      Err(_e)=>{false},
+      }
 }
 fn get_dest_clean(file:&DirEntry)->String{
 let file_path_string = direntry_to_path(&file).unwrap();        
@@ -56,7 +70,6 @@ fn create_n_write_file(dest_clean:String,content:String)->bool{
 fn clone_data_to_site()->Result<Vec<String>,Error>{
 clone_dir_structure("data","site")  
 }
-
 fn get_dir_struct_clean()->Result<Vec<String>,Error>{
   let mut dir_struct = 
   dir_structure_to_string("data")?;
