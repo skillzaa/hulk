@@ -1,6 +1,8 @@
 mod generator;
-mod util;
+mod pure;
 mod assets;
+mod page_builder;
+mod nav;
 mod indexer;
 mod help;
 mod menu;
