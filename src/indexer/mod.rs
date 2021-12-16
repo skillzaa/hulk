@@ -8,6 +8,7 @@ use std::path::Path;
 #[derive(Debug)]
 pub struct Indexer{
 dir_path:String,
+index_file_path:String,
 }
 
 impl Indexer{
@@ -15,20 +16,20 @@ impl Indexer{
     pub fn new(dir_path:String)->Option<Self>{
         match bro::path_exists(&dir_path) {
         true=>{
+          let index_file_path = format!("{}/index.html",&dir_path);
                 Some(Indexer {
-                        dir_path
+                        dir_path,
+                        index_file_path,
                     })
         },
         false=>{return None},
         }
     }
     fn get_files(&self)->Result<Vec<DirEntry>,Error>{
-    let f = bro::get_files_by_ext("site", "html")?;
+    let f = bro::get_files_by_ext(&self.dir_path, "html")?;
         Ok(f)
     }
     pub fn run(&self)->Result<bool,Error>{      
-  //delteold index if exists
-  let _ = bro::remove_file("site/index.html");  
   let mut html = index_page_start_html();
 
     let files = self.get_files()?;
@@ -43,10 +44,20 @@ impl Indexer{
       }
       //======================================
         html.push_str(get_default_footer());
-        create_n_write_file(&html)?;
+        self.create_n_write_file(&html)?;
         Ok(true)
 
     }
+    fn create_n_write_file(&self,html:&String)->Result<bool,Error>{
+          
+      bro::create_file_brute(&self.index_file_path)?;
+      let res = 
+          bro::write_to_file(&self.index_file_path.as_str(), &html);
+          match res {
+            Ok(_r)=> return Ok(true),
+            Err(e)=> return Err(e),
+          }
+    }  
     fn flat_loop(&self,file:&DirEntry)->Result<String,Error>{
         let mut html = String::new();
         html.push_str("<tr><td>");
@@ -65,16 +76,7 @@ impl Indexer{
     }
 //--------------------------------------------    
 }//Indexer Ends here 
-fn create_n_write_file(html:&String)->Result<bool,Error>{
-    bro::create_file_brute("site/index.html")?;
-        //bro::create_file("./site/index.html")?;
-        let res = 
-        bro::write_to_file("site/index.html", &html);
-        match res {
-          Ok(_r)=> return Ok(true),
-          Err(e)=> return Err(e),
-        }
-}  
+
 fn index_page_start_html()->String{
   let mut html = String::new();
   html.push_str(get_default_header());
@@ -91,10 +93,34 @@ fn index_page_start_html()->String{
 //-----------------------------------
 //-----------------------------------
 mod tests {
+use std::ops::Index;
+
 use super::*;
+#[test]
+fn create_indexer(){
+  let i = 
+  Indexer::new("site/exploration".to_string()).unwrap();
+  // we can check non-pub items also
+  assert_eq!(i.dir_path,"site/exploration");
+  assert_eq!(i.index_file_path,"site/exploration/index.html");
+}
+#[test]
+fn get_files_test(){
+  let i = 
+  Indexer::new("site/exploration".to_string()).unwrap();
+  let files = i.get_files();
+println!("{:?}",files);
+}
 #[test]
 fn first(){
 let indexer =  Indexer::new("site".to_string()).unwrap();
+let run = indexer.run().unwrap();
+println!("{:?}",run);
+
+}
+#[test]
+fn site_exploration_test(){
+let indexer =  Indexer::new("site/exploration".to_string()).unwrap();
 let run = indexer.run().unwrap();
 println!("{:?}",run);
 
