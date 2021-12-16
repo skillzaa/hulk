@@ -1,7 +1,8 @@
 use crate::assets::*;
 use crate::brown as bro;
 use brown::BrownError as Error;
-
+mod indexer;
+use indexer::Indexer;
 // use std::io::{Error};
 use std::path::Path;
 
