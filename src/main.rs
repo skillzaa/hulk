@@ -1,7 +1,7 @@
 mod generator;
 mod util;
 mod assets;
-mod index;
+mod indexer;
 mod help;
 mod init;
 mod gui;
@@ -39,14 +39,14 @@ fn main() {
                         },
                         Err(e)=> println!("{:?}",&e),
                       }
-                  let r = index::index();
-                  match r {
-                    Ok(_r)=>{
-                        println!("index generated successfully");
+                  // let r = indexer::index();
+                  // match r {
+                  //   Ok(_r)=>{
+                  //       println!("index generated successfully");
                         
-                    },
-                    Err(e)=> println!("{:?}",&e),
-                  }
+                  //   },
+                  //   Err(e)=> println!("{:?}",&e),
+                  // }
           },
          "init" => {
           let init_result = init::init();

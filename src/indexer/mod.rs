@@ -5,14 +5,21 @@ use brown::BrownError as Error;
 use std::fs::DirEntry;
 use std::path::Path;
 /// Indexer is given the path of any folder and it will generate an index of all the (html) files there.
+#[derive(Debug)]
 pub struct Indexer{
 dir_path:String,
 }
 
 impl Indexer{
-    pub fn new(dir_path:String)->Self{
-        Indexer {
-            dir_path
+    /// The path should exist
+    pub fn new(dir_path:String)->Option<Self>{
+        match bro::path_exists(&dir_path) {
+        true=>{
+                Some(Indexer {
+                        dir_path
+                    })
+        },
+        false=>{return None},
         }
     }
     fn get_files(&self)->Result<Vec<DirEntry>,Error>{
@@ -27,8 +34,12 @@ impl Indexer{
     let files = self.get_files()?;
     
       for file in files {
-          let i = self.flat_loop(&file);
-        html.push_str(&i);            
+          match self.flat_loop(&file) {
+          Ok(item)=>{
+              html.push_str(&item);            
+          },
+          Err(_e)=>{},
+          }
       }
       //======================================
         html.push_str(get_default_footer());
@@ -36,7 +47,7 @@ impl Indexer{
         Ok(true)
 
     }
-    fn flat_loop(&self,file:&DirEntry)->String{
+    fn flat_loop(&self,file:&DirEntry)->Result<String,Error>{
         let mut html = String::new();
         html.push_str("<tr><td>");
         let file_name = bro::get_file_name(&file)?;
@@ -50,7 +61,7 @@ impl Indexer{
         
         html.push_str(&anchor);
         html.push_str("</td></tr>");
-        html
+        Ok(html)
     }
 //--------------------------------------------    
 }//Indexer Ends here 
@@ -72,4 +83,21 @@ fn index_page_start_html()->String{
   html.push_str("<table>");
   html.push_str("<tr><td>File Name</td></tr>");
   html
+}
+
+//-----------------------------------
+//-----------------------------------
+//------------TESTS------------------
+//-----------------------------------
+//-----------------------------------
+mod tests {
+use super::*;
+#[test]
+fn first(){
+let indexer =  Indexer::new("site".to_string()).unwrap();
+let run = indexer.run().unwrap();
+println!("{:?}",run);
+
+}
+
 }
