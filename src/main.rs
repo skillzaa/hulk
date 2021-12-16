@@ -1,16 +1,14 @@
 mod generator;
-use brown::*; 
-use brown::BrownError as Error;
-
-use std::env;
-mod tasks;
 mod util;
 mod assets;
-use yansi::Paint;
-
-use tasks::{help,index,init};
+mod index;
+mod help;
+mod init;
 mod gui;
-// use util::
+use brown::*; 
+use brown::BrownError as Error;
+use std::env;
+use yansi::Paint;
 use brown; 
 
 fn main() {
