@@ -1,11 +1,11 @@
 mod generator;
-mod assets;
 use brown::*; 
 use brown::BrownError as Error;
 
 use std::env;
 mod tasks;
 mod util;
+mod assets;
 use yansi::Paint;
 
 use tasks::{help,index,init};
