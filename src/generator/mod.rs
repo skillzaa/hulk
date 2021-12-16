@@ -2,6 +2,7 @@ mod flat;
 use flat::*;
 mod non_md;
 mod navbar;
+use navbar::NavBar;
 use crate::assets::get_dark_css;
 mod md;
 use md::md_files;
@@ -23,15 +24,16 @@ get_dir_struct_clean()?;
 //---------------------------------
 // Step 03: Loop for each sub-dir
   for dir in dir_struct_clean{
+  let navbar = get_navbar(&dir);  
   let files = get_files(&dir).unwrap();
   //--------------------------
   for file in files {
     match is_md(&file) {
     true=>{
-        md_files(&file);
+        md_files(&file ,&navbar);
     },
     false=>{
-        non_md_files(&file);
+        non_md_files(&file,&navbar);
     },
     }
   }    
@@ -53,4 +55,18 @@ fn get_dir_struct_clean()->Result<Vec<String>,Error>{
   .collect::<Vec<String>>();
 
 Ok(dir_struct_clean)
+}
+fn get_navbar(path:&String)->String{
+  //---here navbar
+let nb = NavBar::new(&path).unwrap();
+nb.gen_navbar()
+
+}
+
+mod tests {
+  use super::*;
+#[test]
+fn run_test(){
+  run();
+}
 }

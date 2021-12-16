@@ -323,6 +323,7 @@ dependencies = [
  "comrak",
  "fltk",
  "fltk-flow",
+ "qndr",
  "yansi",
 ]
 

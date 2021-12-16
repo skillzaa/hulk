@@ -3,6 +3,7 @@ mod util;
 mod assets;
 mod indexer;
 mod help;
+mod menu;
 mod init;
 mod gui;
 mod app_consts;

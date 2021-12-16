@@ -1,20 +1,18 @@
 //You do not need to link every mod to top level one 
 use crate::assets::*;
-
+use super::navbar::NavBar;
 use std::fs::DirEntry;
 use crate::*;
 
-use super::navbar::NavBar;
 use comrak::{markdown_to_html, ComrakOptions};
 // use comrak;
-pub fn md_files(file:&DirEntry)->bool{
+pub fn md_files(file:&DirEntry,navbar:&String)->bool{
     // let file_name = get_file_name(&file).unwrap();
     // println!("Non md file:: {}",file_name);
-    let content = get_content(&file);  
+    let content = get_content(&file,navbar);  
     let dest_clean = get_dest_clean_for_md(&file);
     create_n_write_file(dest_clean,content)  
 }
-
 fn get_dest_clean_for_md(file:&DirEntry)->String{
 let file_path_string = direntry_to_path(&file).unwrap();        
 let dest = file_path_string.replacen("data", "site", 1);
@@ -23,23 +21,16 @@ let dest = file_path_string.replacen("data", "site", 1);
  println!("{:?}",dd);
         dd
 }
-fn get_content(file:&DirEntry)->String{
+fn get_content(file:&DirEntry,navbar:&String)->String{
 let mut page = String::new();
 page.push_str(get_default_header());
-// let n = self.get_nav();
-//   match n {
-//   Ok(item)=>{
-//     page.push_str(&item);
-//   },
-//   Err(_e)=>{},
-//   }
 let p = 
 direntry_to_path(&file).unwrap();
 let cont = std::fs::
     read_to_string(&p).unwrap();
 let md_to_html = 
 comrak::markdown_to_html(&cont,&ComrakOptions::default());
-page.push_str(&get_navbar(&p));
+page.push_str(&navbar);
 page.push_str(md_to_html.as_str());
 page.push_str(get_default_footer());
 page
