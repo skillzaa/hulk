@@ -129,6 +129,15 @@ assert!(run.is_ok());
 
 }
 #[test]
+fn site_a2_test(){
+let indexer =  Indexer::new("site/a2".to_string()).unwrap();
+// let files = 
+// indexer.get_files().unwrap();
+let run = indexer.run();
+assert!(run.is_ok());
+
+}
+#[test]
 fn create_index_file_test(){
   let indexer =  Indexer::new("site/a2".to_string()).unwrap();
   // assert!(indexer.is_ok);
