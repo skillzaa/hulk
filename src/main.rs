@@ -9,9 +9,10 @@ use brown::*;
 use brown::BrownError as Error;
 use std::env;
 use yansi::Paint;
-use brown; 
-
+use brown;
 fn main() {
+// let a = create_file_brute("site/a2/index.html");
+// println!("{:?}",a);
   // Generator::run();
   // return;
   //init::init();

@@ -44,19 +44,19 @@ impl Indexer{
       }
       //======================================
         html.push_str(get_default_footer());
-        self.create_n_write_file(&html)?;
+        self.create_index_file()?;
+        self.write_index_file(&html)?;
         Ok(true)
 
     }
-    fn create_n_write_file(&self,html:&String)->Result<bool,Error>{
+    fn write_index_file(&self,html:&String)->Result<bool,Error>{
+          bro::write_to_file(&self.index_file_path.as_str(), &html)?;
+          Ok(true)
+    }  
+    fn create_index_file(&self)->Result<bool,Error>{
           
       bro::create_file_brute(&self.index_file_path)?;
-      let res = 
-          bro::write_to_file(&self.index_file_path.as_str(), &html);
-          match res {
-            Ok(_r)=> return Ok(true),
-            Err(e)=> return Err(e),
-          }
+      Ok(true)
     }  
     fn flat_loop(&self,file:&DirEntry)->Result<String,Error>{
         let mut html = String::new();
@@ -113,17 +113,27 @@ println!("{:?}",files);
 }
 #[test]
 fn first(){
-let indexer =  Indexer::new("site".to_string()).unwrap();
+let indexer = Indexer::new("site".to_string())
+.unwrap();
 let run = indexer.run().unwrap();
-println!("{:?}",run);
-
+// println!("{:?}",run);
+assert!(run);
 }
 #[test]
 fn site_exploration_test(){
 let indexer =  Indexer::new("site/exploration".to_string()).unwrap();
-let run = indexer.run().unwrap();
-println!("{:?}",run);
+// let files = 
+// indexer.get_files().unwrap();
+let run = indexer.run();
+assert!(run.is_ok());
 
 }
-
+#[test]
+fn create_index_file_test(){
+  let indexer =  Indexer::new("site/a2".to_string()).unwrap();
+  // assert!(indexer.is_ok);
+  let s 
+  =indexer.create_index_file();
+assert!(s.is_ok());
+}
 }
