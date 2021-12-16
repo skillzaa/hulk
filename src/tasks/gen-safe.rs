@@ -56,11 +56,3 @@ fn md_to_html(dir_entry:&DirEntry)->Result<String,Error>{
   let html = markdown_to_html(&md, &ComrakOptions::default());
    Ok(html)    
 }
-pub fn gen_dark_css(){
-  let write_path_css = Path::new("./site/main.css");
-  let _ = bro::create_file(write_path_css.to_str().unwrap());
-  let css = get_dark_css();
-    fs::write(write_path_css, css).unwrap();
-    println!("Dark Theme css generated..");
-
-}

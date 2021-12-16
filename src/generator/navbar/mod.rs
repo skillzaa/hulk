@@ -7,7 +7,7 @@ pub struct NavBar {
     urltolinks:UrlToLinks,
 }
 impl NavBar{
-    pub fn new(url:&'static str)->Result<Self,Error>{
+    pub fn new(url:&String)->Result<Self,Error>{
         let urltolinks = UrlToLinks
         ::new(url.to_string());
         match urltolinks {

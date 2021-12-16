@@ -1,7 +1,10 @@
-//You do not need to link every mod to top level one can have local level mods as well
-use super::assets::*;
+//You do not need to link every mod to top level one 
+use crate::assets::*;
+
 use std::fs::DirEntry;
 use crate::*;
+
+use super::navbar::NavBar;
 use comrak::{markdown_to_html, ComrakOptions};
 // use comrak;
 pub fn md_files(file:&DirEntry)->bool{
@@ -36,6 +39,7 @@ let cont = std::fs::
     read_to_string(&p).unwrap();
 let md_to_html = 
 comrak::markdown_to_html(&cont,&ComrakOptions::default());
+page.push_str(&get_navbar(&p));
 page.push_str(md_to_html.as_str());
 page.push_str(get_default_footer());
 page
@@ -59,4 +63,9 @@ fn create_n_write_file(dest_clean:String,content:String)->bool{
     let _r = write_to_file
     (&dest_clean, &content).unwrap();
   true
+}
+fn get_navbar(path:&String)->String{
+  let nb = NavBar::new(path).unwrap();
+  let r = nb.gen_navbar();
+  r
 }

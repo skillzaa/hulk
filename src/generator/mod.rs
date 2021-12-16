@@ -1,14 +1,14 @@
 mod flat;
 use flat::*;
 mod non_md;
-mod assets;
+mod navbar;
+use crate::assets::get_dark_css;
 mod md;
 use md::md_files;
 use non_md::non_md_files;
 use brown::*; 
 use brown::BrownError as Error;
 
-use self::assets::get_dark_css;
 
 pub fn run()->Result<bool,Error>{
 // Step 00: Add css file
