@@ -5,6 +5,8 @@ mod indexer;
 mod help;
 mod init;
 mod gui;
+mod app_consts;
+use app_consts::*;
 use brown::*; 
 use brown::BrownError as Error;
 use std::env;
