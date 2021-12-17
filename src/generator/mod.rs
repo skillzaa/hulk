@@ -1,8 +1,7 @@
 mod flat;
 use flat::*;
 mod non_md;
-mod navbar;
-use navbar::NavBar;
+use crate::nav::get_nav;
 use crate::assets::get_dark_css;
 mod md;
 use md::md_files;
@@ -24,7 +23,12 @@ get_dir_struct_clean()?;
 //---------------------------------
 // Step 03: Loop for each sub-dir
   for dir in dir_struct_clean{
-  let navbar = get_navbar(&dir);  
+    //----fake data-----
+    let sd = vec!["cc","dd","ee"];
+    let mutated:Vec<String>  = sd.iter()
+    .map(|s| String::from(*s)).collect();
+    //------------------------
+  let navbar = get_nav(&dir,&mutated);  
   let files = get_files(&dir).unwrap();
   //--------------------------
   for file in files {
@@ -47,7 +51,7 @@ clone_dir_structure("data","site")
 }
 fn get_dir_struct_clean()->Result<Vec<String>,Error>{
   let mut dir_struct = 
-  dir_structure_to_string("data")?;
+  dir_structure_to_string("site")?;
   //-- MY FIRST
   let dir_struct_clean = 
   dir_struct.iter_mut().
@@ -55,12 +59,6 @@ fn get_dir_struct_clean()->Result<Vec<String>,Error>{
   .collect::<Vec<String>>();
 
 Ok(dir_struct_clean)
-}
-fn get_navbar(path:&String)->String{
-  //---here navbar
-let nb = NavBar::new(&path).unwrap();
-nb.gen_navbar()
-
 }
 
 mod tests {

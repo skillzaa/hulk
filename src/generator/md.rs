@@ -1,6 +1,5 @@
 //You do not need to link every mod to top level one 
 use crate::assets::*;
-use super::navbar::NavBar;
 use std::fs::DirEntry;
 use crate::*;
 
@@ -54,9 +53,4 @@ fn create_n_write_file(dest_clean:String,content:String)->bool{
     let _r = write_to_file
     (&dest_clean, &content).unwrap();
   true
-}
-fn get_navbar(path:&String)->String{
-  let nb = NavBar::new(path).unwrap();
-  let r = nb.gen_navbar();
-  r
 }
