@@ -1,5 +1,4 @@
 mod generator;
-mod pure;
 mod assets;
 mod nav;
 mod indexer;
@@ -35,14 +34,14 @@ fn main() {
       let v = value.as_str();
         match v {
           "gen" => {
-            let gen_result = generator::run();
-                      match gen_result {
-                        Ok(_r)=>{
-                            println!("Markdown to Html generation completed..");
+            // let gen_result = generator::run();
+            //           match gen_result {
+            //             Ok(_r)=>{
+            //                 println!("Markdown to Html generation completed..");
                             
-                        },
-                        Err(e)=> println!("{:?}",&e),
-                      }
+            //             },
+            //             Err(e)=> println!("{:?}",&e),
+            //           }
                   // let r = indexer::index();
                   // match r {
                   //   Ok(_r)=>{
