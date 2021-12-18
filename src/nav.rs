@@ -17,7 +17,7 @@ bro::get_dirs(&dir_path);
         let sd_str = bro::direntry_to_path(&sd).unwrap();    
         // let sd_str = String::from(&sd.path().as_path());    
         let link = 
-        format!("<a href='./{}/{}/index.html'>{}</a>",dir_path,sd_str,sd_str);    
+        format!("<a href='./{}/index.html'>{}</a>",sd_str,sd_str);    
         nav.push_str(&link);
         }
         nav.push_str(&"</nav></header>");

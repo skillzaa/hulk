@@ -26,6 +26,14 @@ pub fn generate_report()->Result<Hunter,Error>{
     let mut hunter = Hunter::default();
       let dir_struct = pure::data_dir_struct_clean()?;
       hunter.total_data_subfolders = dir_struct.len();  
+      let site_dir_struct = bro::
+      clone_dir_structure(
+          app_consts::HULK_DATA_DIR,
+           app_consts::HULK_SITE_DIR);
+       match site_dir_struct {
+       Ok(item)=>{},
+       Err(_e)=>{panic!("clone_dir_structure");},
+       }    
       //--Outer loop around dirs
       for dir in dir_struct{
         // let navbar = nav::get_nav(&dir); 
@@ -49,9 +57,8 @@ file_data.file_ext = bro::get_ext(&file)?;
 file_data.site_path = String::from(pure::data_to_site_path_from_string
     (&dir)); 
 file_data.nav = nav::get_nav(&file_data.site_path);   
-//,,,,,,   
-// file_data.file_name = get_file_name(&file);
 file_data.file_name = bro::get_file_name(&file).unwrap();
+// file_data.content = get_content(&file);
         //--------------------------
               match pure::is_md(&file) {
               true=>{
@@ -67,7 +74,11 @@ file_data.file_name = bro::get_file_name(&file).unwrap();
       }
       Ok(hunter)
     }
-  
+fn get_content(file:&DirEntry)->String{
+    let file_path = file.path();
+    std::fs::
+        read_to_string(&file_path).unwrap()
+}  
     #[cfg(test)]
 mod tests {
     use super::*;
