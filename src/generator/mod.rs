@@ -20,107 +20,18 @@ use non_md::non_md_file;
     2-e: create the file
     2-f: place file in site folder   
 */
-pub struct Generator {
-  data_dir_name:String,
-  site_dir_name:String,
-}
+pub struct Generator {}
+
 impl Generator{
   pub fn new(data_dir_name:String,
     site_dir_name:String)->Self{
-      Generator{
-      data_dir_name,
-      site_dir_name,
-    }
+      Generator{}
   }
-  pub fn data_dir_struct(&self)->Result<Vec<String>,Error>{
-  let mut dir_struct = 
-  bro::dir_structure_to_string(&self.data_dir_name)?;
-  //-- MY FIRST
-  let dir_struct_clean = 
-  dir_struct.iter_mut().
-  map(|i|i.replace("./",""))
-  .collect::<Vec<String>>();
-
-  Ok(dir_struct_clean)
-  }
-  pub fn site_dir_struct(&self)->Result<Vec<String>,Error>{
-    let data_struct = self.data_dir_struct()?;
-    let output:Vec<String> = data_struct.into_iter()
-    .map(|i|i.replacen(
-      &self.data_dir_name, 
-      &self.site_dir_name,
-      1))
-      .collect::<Vec<String>>();
-    Ok(output)
-  }
-  // This is just both the loops inner and outer
-  pub fn run(&self)->Result<String,Error>{
-    let dir_struct = self.data_dir_struct()?;
-    //--Outer loop around dirs
-    for dir in dir_struct{
-      // let navbar = get_nav(); 
-      let navbar = nav::fake(); 
-      //-----get files
-      let files = bro::get_dirs(&dir)?;
-      //----------------------- 
-        //--Inner loop around files
-        for file in files {
-            match is_md(&file) {
-            true=>{
-                // let final_file = md_file(&file,&navbar);
-                let content = get_content(&file);
-                let dest = get_dest_clean(&file);
-              create_n_write_file(dest, content);
-            },
-            false=>{
-              // let content = get_content(&file);
-              let content = "bla bla bla".to_string();
-              let dest = get_dest_clean(&file);
-              let _r = create_n_write_file(dest, content);
-              // return Ok(final_file);
-            },
-          }
-      }
-    }
-      Ok("ok".to_string())
+  pub fn gen(&self)->Result<String,Error>{
+    todo!();
     }
 
 }//impl
-
-
-fn create_n_write_file(dest:String,content:String)->bool{
-  let _b = 
-  bro::create_file_brute(dest.as_str())
-  .unwrap();
-    let _r = bro::write_to_file
-    (&dest, &content).unwrap();
-  true
-}
-fn get_dest_clean(file:&DirEntry)->String{
-  let file_path_string = 
-  bro::direntry_to_path(&file).unwrap();        
-  let dest = file_path_string.replacen("data_test", "site", 1);
-  let d = dest.replace("./","");
-          d
-}
-fn is_md(file:&DirEntry)->bool{
-let ext = bro::get_ext(&file);
-        match ext {
-        Ok(item)=>{
-            if item == "md"{
-            true
-            }else {
-            false
-            }
-        },
-        Err(_e)=>{false},
-        }
-}
-fn get_content(file:&DirEntry)->String{
-  let file_path = file.path();
-  std::fs::
-    read_to_string(&file_path).unwrap()
-}
   mod tests {
     use super::*;
   #[test]
