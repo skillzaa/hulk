@@ -1,6 +1,6 @@
 mod generator;
 mod assets;
-mod hunter;
+mod report;
 mod pure;
 mod nav;
 mod indexer;

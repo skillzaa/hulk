@@ -7,14 +7,14 @@ use crate::pure;
 use crate::app_consts;
 use file_move_info::FileMoveInfo;
 #[derive(Debug)]
-pub struct Hunter {
+pub struct Report {
     pub total_files:usize,
     pub total_data_subfolders:usize,
     pub files_data:Vec<FileMoveInfo>,
   }
-impl Hunter{
+impl Report{
     pub fn default()->Self{
-        Hunter{
+        Report{
             total_files: 0,
             total_data_subfolders:0,
             files_data:Vec::new(),
@@ -22,8 +22,8 @@ impl Hunter{
     }
   }    
 
-pub fn generate_report()->Result<Hunter,Error>{
-    let mut hunter = Hunter::default();
+pub fn gen_report()->Result<Report,Error>{
+    let mut hunter = Report::default();
       let dir_struct = pure::data_dir_struct_clean()?;
       hunter.total_data_subfolders = dir_struct.len();  
       let site_dir_struct = bro::
@@ -84,9 +84,9 @@ mod tests {
     use super::*;
 #[test]
 fn report(){
-    // let mut h = Hunter::default();
-    let hunter = generate_report().unwrap();
-    println!("{:#?}",hunter);
+    // let mut h = Report::default();
+    let report = generate_report().unwrap();
+    println!("{:#?}",report);
 }
 }
   

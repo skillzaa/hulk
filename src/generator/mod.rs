@@ -2,23 +2,18 @@ mod md;
 mod non_md;
 use brown::BrownError as Error;
 use crate::brown as bro;
-use std::fs::DirEntry;
-use crate::nav;
 use md::md_file;
 use non_md::non_md_file;
+use crate::report::{gen_report,Report};
+use crate::pure;
+use crate::app_consts;
 /*
  Steps : 
   later 1 : gen css file in site folder.
   2 : get the dir structure from data.
   -- there may be a lot of dirs but the operation is flat since all the DIR urls are in one vec. but for each dur there aremany file thus we have 2 loops
     --main loop over folders
-    -- inner loop over each file in folder
-    2-a: get file header
-    2-b: get file content
-    2-c: markdown to html the content
-    2-d: get the nav bar - using site folder urls
-    2-e: create the file
-    2-f: place file in site folder   
+    
 */
 pub struct Generator {}
 
@@ -27,9 +22,31 @@ impl Generator{
     site_dir_name:String)->Self{
       Generator{}
   }
-  pub fn gen(&self)->Result<String,Error>{
-    todo!();
-    }
+pub fn gen(&self)->Result<String,Error>{
+//>>>>>>>>>>>>>Gen Begin<<<<<<<<<<
+//--Step  get report from Hunter 
+//--Step  crate site forlder  
+//--Step  get data forlder struct  
+//--Step  crate main css file  
+//--Step  run the 2 main loops for dirs and files
+let report = gen_report()?;
+let site_dir_created = pure::create_site_folder()?;
+let data_dir_Struct = bro::
+dir_structure_to_string(
+  app_consts::HULK_DATA_DIR)?;
+//---->--->---> First loop
+for dir in data_dir_Struct {
+  let files = bro::get_files(&dir)?;
+  //---->--->---> second loop  
+  for file in files{
+    //----- dhamal 
+  }
+//---->--->---> second loop ends  
+}  
+//---->--->---> First loop ends  
+todo!();
+//>>>>>>>>>>>>>Gen Ends<<<<<<<<<<<
+}//gen ends
 
 }//impl
   mod tests {

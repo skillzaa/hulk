@@ -1,7 +1,15 @@
 use crate::assets::*;
 use std::fs::DirEntry;
 use crate::*;
-
+/**
+ -- inner loop over each file in folder
+    2-a: get file header
+    2-b: get file content
+    2-c: markdown to html the content
+    2-d: get the nav bar - using site folder urls
+    2-e: create the file
+    2-f: place file in site folder   
+ */
 use comrak::{markdown_to_html, ComrakOptions};
 // use comrak;
 pub fn md_file(file:&DirEntry,navbar:&String)->String{
