@@ -35,7 +35,14 @@ dir_structure_to_string(
   app_consts::HULK_DATA_DIR)?;
 //---->--->---> First loop
 for info in report.files_data {
-    println!("{:#?}",info);
+    let file_name_raw = 
+      format!("{}/{}.{}",info.site_path,info.file_name,info.file_ext);
+      let file_name = 
+      file_name_raw.replace(' ', "_");  
+      // println!("{:?}",file_name);
+      //-----write files to disk
+let f = bro::write_to_file
+(&file_name, &"ddd".to_string());
 }  
 //---->--->---> First loop ends  
 Ok("fff".to_string())
