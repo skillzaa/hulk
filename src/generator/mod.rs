@@ -12,8 +12,7 @@ use crate::app_consts;
   later 1 : gen css file in site folder.
   2 : get the dir structure from data.
   -- there may be a lot of dirs but the operation is flat since all the DIR urls are in one vec. but for each dur there aremany file thus we have 2 loops
-    --main loop over folders
-    
+    --main loop over folders.
 */
 pub struct Generator {}
 
@@ -23,7 +22,7 @@ impl Generator{
       Generator{}
   }
 pub fn gen(&self)->Result<String,Error>{
-//>>>>>>>>>>>>>Gen Begin<<<<<<<<<<
+//-->>>>>>>>>>>>>Gen Begin<<<<<<<<<<
 //--Step  get report from Hunter 
 //--Step  crate site forlder  
 //--Step  get data forlder struct  
@@ -35,69 +34,23 @@ let data_dir_Struct = bro::
 dir_structure_to_string(
   app_consts::HULK_DATA_DIR)?;
 //---->--->---> First loop
-for dir in data_dir_Struct {
-  let files = bro::get_files(&dir)?;
-  //---->--->---> second loop  
-  for file in files{
-    //----- dhamal 
-  }
-//---->--->---> second loop ends  
+for info in report.files_data {
+    println!("{:#?}",info);
 }  
 //---->--->---> First loop ends  
-todo!();
-//>>>>>>>>>>>>>Gen Ends<<<<<<<<<<<
+Ok("fff".to_string())
+//---->>>>>>>>>>>>>Gen Ends<<<<<<<<<<<
 }//gen ends
 
-}//impl
+}//impl ends
   mod tests {
     use super::*;
-  #[test]
-  fn data_dir_struct_test(){
-  let g = Generator
-  ::new("data_test".to_string(),
-"site".to_string());   
-  let p = g.data_dir_struct().unwrap();
-  let resp = [
-  "data_test", 
-  "data_test/b",
-  "data_test/a",
-  "data_test/a/a1",
-  "data_test/a/a1/a2",
-  "data_test/a/a1/a2/a3-b",
-  "data_test/a/a1/a2/a3-a"
-  ];
-  let stng = resp.into_iter()
-  .map(|i|i.to_string()).collect::<Vec<String>>();
-  assert_eq!(stng,p);
-  // println!("{:?}",p);  
-  }
-  #[test]
-  fn site_dir_struct_test(){
-    let g = Generator
-    ::new("data_test".to_string(),
-  "site".to_string());   
-    let p = g.site_dir_struct().unwrap();
-    let resp = [
-    "site", 
-    "site/b",
-    "site/a",
-    "site/a/a1",
-    "site/a/a1/a2",
-    "site/a/a1/a2/a3-b",
-    "site/a/a1/a2/a3-a"
-    ];
-    let stng = resp.into_iter()
-    .map(|i|i.to_string()).collect::<Vec<String>>();
-    assert_eq!(stng,p);
-    println!("{:?}",p);  
-  }
-
   #[test]
   fn run_test(){
     let g = Generator
     ::new("data_test".to_string(),
   "site".to_string());   
-  let res = g.run();
+  let res = g.gen().unwrap();
   }
   //----test mod ends
 }

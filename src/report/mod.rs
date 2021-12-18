@@ -85,7 +85,7 @@ mod tests {
 #[test]
 fn report(){
     // let mut h = Report::default();
-    let report = generate_report().unwrap();
+    let report = gen_report().unwrap();
     println!("{:#?}",report);
 }
 }
