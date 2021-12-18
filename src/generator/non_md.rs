@@ -1,12 +1,14 @@
 use std::fs::DirEntry;
 use crate::*;
 
-pub fn non_md_files(file:&DirEntry,navbar:&String)->bool{
+pub fn non_md_file(file:&DirEntry)->String{
     // let file_name = get_file_name(&file).unwrap();
     // println!("Non md file:: {}",file_name);
     let content = get_content(&file);  
     let dest_clean = get_dest_clean(&file);
-    create_n_write_file(dest_clean,content)  
+    dest_clean
+    // create_n_write_file(dest_clean,content)  
+
 }
 
 fn get_dest_clean(file:&DirEntry)->String{

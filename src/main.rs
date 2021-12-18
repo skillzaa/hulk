@@ -1,5 +1,7 @@
 mod generator;
 mod assets;
+mod hunter;
+mod pure;
 mod nav;
 mod indexer;
 mod help;
