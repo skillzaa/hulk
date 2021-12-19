@@ -4,6 +4,7 @@ mod report;
 mod pure;
 mod nav;
 mod indexer;
+use indexer::Indexer;
 mod help;
 mod init;
 mod gui;
@@ -15,17 +16,14 @@ use std::env;
 use yansi::Paint;
 use brown;
 fn main() {
-// let a = create_file_brute("site/a2/index.html");
-// println!("{:?}",a);
-  // Generator::run();
-  // return;
-  //init::init();
-  println!("                                                  ");
-  println!("                                                  ");
+ let gap = "                           "; 
+  println! ("{}",gap);
+  println! ("{}",gap);
   let bar_top = "================== HULK =======================";
   println!("{}",Paint::green(bar_top));
-  println!("                                                  ");
-  println!("                                                  ");
+  println! ("{}",gap);
+  println! ("{}",gap);
+
 
   let args: Vec<String> = env::args().collect();
 
@@ -36,22 +34,24 @@ fn main() {
       let v = value.as_str();
         match v {
           "gen" => {
-            // let gen_result = generator::run();
-            //           match gen_result {
-            //             Ok(_r)=>{
-            //                 println!("Markdown to Html generation completed..");
+            let gen_result = generator::gen();
+                      match gen_result {
+                        Ok(_r)=>{
+                            println!("Markdown to Html generation completed..");
                             
-            //             },
-            //             Err(e)=> println!("{:?}",&e),
-            //           }
-                  // let r = indexer::index();
-                  // match r {
-                  //   Ok(_r)=>{
-                  //       println!("index generated successfully");
+                        },
+                        Err(e)=> println!("{:?}",&e),
+                      }
+                  let indexer = Indexer::new(app_consts::HULK_SITE_DIR.to_string()).unwrap();
+                  
+                  let r = indexer.run();
+                  match r {
+                    Ok(_r)=>{
+                        println!("index files generated successfully");
                         
-                  //   },
-                  //   Err(e)=> println!("{:?}",&e),
-                  // }
+                    },
+                    Err(e)=> println!("{:?}",&e),
+                  }
           },
          "init" => {
           let init_result = init::init();

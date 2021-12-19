@@ -20,16 +20,17 @@ impl Report{
             files_data:Vec::new(),
         }
     }
-  }    
+}    
 
 pub fn gen_report()->Result<Report,Error>{
-    let mut hunter = Report::default();
-      let dir_struct = pure::data_dir_struct_clean()?;
-      hunter.total_data_subfolders = dir_struct.len();  
-      let site_dir_struct = bro::
+let mut hunter = Report::default();
+let dir_struct = pure::data_dir_struct_clean()?;
+hunter.total_data_subfolders = dir_struct.len();  
+let site_dir_struct = bro::
       clone_dir_structure(
           app_consts::HULK_DATA_DIR,
            app_consts::HULK_SITE_DIR);
+           
        match site_dir_struct {
        Ok(item)=>{},
        Err(_e)=>{panic!("clone_dir_structure");},

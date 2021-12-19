@@ -29,7 +29,7 @@ impl Indexer{
     let f = bro::get_files_by_ext(&self.dir_path, "html")?;
         Ok(f)
     }
-    pub fn run(&self)->Result<bool,Error>{      
+  pub fn run(&self)->Result<bool,Error>{      
   let mut html = index_page_start_html();
 
     let files = self.get_files()?;
