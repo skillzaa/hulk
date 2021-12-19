@@ -1,5 +1,6 @@
 
-
+mod demo_md;
+pub use demo_md::demo_md;
 
   pub fn get_default_header()->&'static str{
     let a = r#"

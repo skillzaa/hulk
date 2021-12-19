@@ -1,7 +1,7 @@
 use crate::assets::*;
 use crate::bro;
 use brown::BrownError as Error;
-
+use crate::unit;
 use std::fs::DirEntry;
 use std::path::Path;
 /// Indexer is given the path of any folder and it will generate an index of all the (html) files there.
@@ -29,15 +29,16 @@ impl Indexer{
     let f = bro::get_files_by_ext(&self.dir_path, "html")?;
         Ok(f)
     }
-  pub fn run(&self)->Result<bool,Error>{      
+  pub fn run(&self)->Result<i32,Error>{      
   let mut html = index_page_start_html();
-
+  let mut counter = 0;    
     let files = self.get_files()?;
     
       for file in files {
           match self.flat_loop(&file) {
           Ok(item)=>{
-              html.push_str(&item);            
+              html.push_str(&item);
+              counter += 1;            
           },
           Err(_e)=>{},
           }
@@ -46,7 +47,7 @@ impl Indexer{
         html.push_str(get_default_footer());
         self.create_index_file()?;
         self.write_index_file(&html)?;
-        Ok(true)
+        Ok(counter)
 
     }
     fn write_index_file(&self,html:&String)->Result<bool,Error>{
@@ -54,7 +55,6 @@ impl Indexer{
           Ok(true)
     }  
     fn create_index_file(&self)->Result<bool,Error>{
-          
       bro::create_file_brute(&self.index_file_path)?;
       Ok(true)
     }  
@@ -92,57 +92,7 @@ fn index_page_start_html()->String{
 //------------TESTS------------------
 //-----------------------------------
 //-----------------------------------
+#[cfg(test)]
 mod tests {
-use std::ops::Index;
 
-use super::*;
-#[test]
-fn create_indexer(){
-  let i = 
-  Indexer::new("site/exploration".to_string()).unwrap();
-  // we can check non-pub items also
-  assert_eq!(i.dir_path,"site/exploration");
-  assert_eq!(i.index_file_path,"site/exploration/index.html");
-}
-#[test]
-fn get_files_test(){
-  let i = 
-  Indexer::new("site/exploration".to_string()).unwrap();
-  let files = i.get_files();
-println!("{:?}",files);
-}
-#[test]
-fn first(){
-let indexer = Indexer::new("site".to_string())
-.unwrap();
-let run = indexer.run().unwrap();
-// println!("{:?}",run);
-assert!(run);
-}
-#[test]
-fn site_exploration_test(){
-let indexer =  Indexer::new("site/exploration".to_string()).unwrap();
-// let files = 
-// indexer.get_files().unwrap();
-let run = indexer.run();
-assert!(run.is_ok());
-
-}
-#[test]
-fn site_a2_test(){
-let indexer =  Indexer::new("site/a2".to_string()).unwrap();
-// let files = 
-// indexer.get_files().unwrap();
-let run = indexer.run();
-assert!(run.is_ok());
-
-}
-#[test]
-fn create_index_file_test(){
-  let indexer =  Indexer::new("site/a2".to_string()).unwrap();
-  // assert!(indexer.is_ok);
-  let s 
-  =indexer.create_index_file();
-assert!(s.is_ok());
-}
 }

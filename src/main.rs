@@ -7,6 +7,7 @@ mod nav;
 mod indexer;
 mod help;
 mod init;
+mod unit;
 // mod gui;
 mod app_consts;
 use brown as bro;
