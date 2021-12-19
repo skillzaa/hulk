@@ -1,81 +1,18 @@
+mod cli_gui;
 mod generator;
 mod assets;
 mod report;
 mod pure;
 mod nav;
 mod indexer;
-use indexer::Indexer;
 mod help;
 mod init;
 // mod gui;
 mod app_consts;
-use app_consts::*;
-use brown::*; 
-use brown::BrownError as Error;
-use std::env;
-use yansi::Paint;
-use brown;
-fn main() {
- let gap = "                           "; 
-  println! ("{}",gap);
-  println! ("{}",gap);
-  let bar_top = "================== HULK =======================";
-  println!("{}",Paint::green(bar_top));
-  println! ("{}",gap);
-  println! ("{}",gap);
+use brown as bro;
+use cli_gui::cli_gui;
 
 
-  let args: Vec<String> = env::args().collect();
-
-  let arg_one_option = args.get(1);
-
-  match arg_one_option {
-    Some(value)=>{
-      let v = value.as_str();
-        match v {
-          "gen" => {
-            let gen_result = generator::gen();
-                      match gen_result {
-                        Ok(_r)=>{
-                            println!("Markdown to Html generation completed..");
-                            
-                        },
-                        Err(e)=> println!("{:?}",&e),
-                      }
-                  let indexer = Indexer::new(app_consts::HULK_SITE_DIR.to_string()).unwrap();
-                  
-                  let r = indexer.run();
-                  match r {
-                    Ok(_r)=>{
-                        println!("index files generated successfully");
-                        
-                    },
-                    Err(e)=> println!("{:?}",&e),
-                  }
-          },
-         "init" => {
-          let init_result = init::init();
-                      match init_result {
-                        Ok(_r)=>{
-                            println!("Project initialized....");
-                            
-                        },
-                        Err(e)=> println!("{:?}",&e),
-                      } 
-          },
-          // "gui" => gui::gui(),
-          "help" => help::help(),
-          _ => println!("command not found ==> {}", Paint::red(v)),
-        }
-      
-    },
-    None => {help::help()},
-  }
-  
-  println! ("{}",gap);
-  let bar_bot = "================== HULK ENDS ======================= "; 
-  println!("{}",Paint::green(bar_bot));
-  println! ("{}",gap);
-
-
-}//main
+fn main(){
+  cli_gui();
+}

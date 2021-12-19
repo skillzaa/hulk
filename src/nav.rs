@@ -1,6 +1,6 @@
-use crate::brown as bro;
+use crate::bro;
 use std::fs::DirEntry;
-use crate::BrownError as Error;
+use crate::bro::BrownError as Error;
 /// I am trying 2 techniques 
 ///     : Fake data , TDD create fn with output and then insert code.
 /// remove all the operations and just create oure componenets and later provide io etc as a layer 

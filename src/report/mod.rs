@@ -1,7 +1,7 @@
 mod file_move_info;
 use crate::nav;
 use brown::BrownError as Error;
-use crate::brown as bro;
+use crate::bro;
 use std::fs::DirEntry;
 use crate::pure;
 use crate::app_consts;

@@ -1,5 +1,5 @@
-use crate::BrownError as Error;
-use crate::brown as bro;
+use crate::bro::BrownError as Error;
+use crate::bro;
 use crate::app_consts;
 pub fn data_dir_struct_clean()->Result<Vec<String>,Error>{
     let mut dir_struct = 

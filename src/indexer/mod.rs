@@ -1,5 +1,5 @@
 use crate::assets::*;
-use crate::brown as bro;
+use crate::bro;
 use brown::BrownError as Error;
 
 use std::fs::DirEntry;

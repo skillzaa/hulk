@@ -1,7 +1,7 @@
 mod md;
 mod non_md;
 use brown::BrownError as Error;
-use crate::brown as bro;
+use crate::bro;
 use md::md_file;
 use non_md::non_md_file;
 use crate::report::{gen_report,Report};

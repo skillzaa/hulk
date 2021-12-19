@@ -1,4 +1,4 @@
-use crate::brown as bro;
+use crate::bro;
 use std::fs::DirEntry;
 
 pub fn is_md(file:&DirEntry)->bool{
