@@ -11,17 +11,18 @@ use crate::app_consts;
 pub fn gen()->Result<bool,Error>{
 //-->>>>>>>>>>>>>Gen Begin<<<<<<<<<<
 
-//--Step  00.1 crate main css file  
-pure::create_css();
 
-//--Step 01 delete old site folder 
+//--Step 00 delete old site folder 
 bro::remove_dir_brute(app_consts::HULK_SITE_DIR)?;
+
+//--Step 00 crate site forlder  
+pure::create_site_folder()?;
+
+//--Step  00 crate main css file  
+pure::create_css();
 
 //--Step 02 get report from Hunter 
 let report = gen_report()?;
-
-//--Step 03 crate site forlder  
-let site_dir_created = pure::create_site_folder()?;
 
 // let data_dir_Struct = bro::
 // dir_structure_to_string(
@@ -47,7 +48,8 @@ Ok(true)
     use super::*;
   #[test]
   fn run_test(){
-  let res = gen().unwrap();
+  let res = gen();
+  assert!(res.is_ok());
   }
   //----test mod ends
 }

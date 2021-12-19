@@ -7,7 +7,7 @@ mod indexer;
 use indexer::Indexer;
 mod help;
 mod init;
-mod gui;
+// mod gui;
 mod app_consts;
 use app_consts::*;
 use brown::*; 
@@ -63,18 +63,19 @@ fn main() {
                         Err(e)=> println!("{:?}",&e),
                       } 
           },
-          "gui" => gui::gui(),
+          // "gui" => gui::gui(),
           "help" => help::help(),
-          _ => println!("Command not found ==> {}", Paint::red(v)),
+          _ => println!("command not found ==> {}", Paint::red(v)),
         }
       
     },
     None => {help::help()},
   }
   
-  println!("                                                  ");
+  println! ("{}",gap);
   let bar_bot = "================== HULK ENDS ======================= "; 
   println!("{}",Paint::green(bar_bot));
-  println!("                                                  ");
+  println! ("{}",gap);
+
 
 }//main
