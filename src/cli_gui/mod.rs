@@ -1,4 +1,4 @@
-use crate::indexer::Indexer;
+use crate::index_all;
 use crate::generator;
 use crate::help;
 use crate::init;
@@ -33,9 +33,9 @@ pub fn cli_gui() {
                         },
                         Err(e)=> println!("{:?}",&e),
                       }
-                  let indexer = Indexer::new(app_consts::HULK_SITE_DIR.to_string()).unwrap();
+
                   
-                  let r = indexer.run();
+                  let r = index_all::run();
                   match r {
                     Ok(_r)=>{
                     println!("index files generated successfully");
