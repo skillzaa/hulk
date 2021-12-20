@@ -109,7 +109,7 @@ fn basic(){
   let ii = i.unwrap();
   let r = ii.run().unwrap();
   assert_eq!(r,1); 
-  // bro::remove_dir_brute(app_consts::HULK_DATA_DIR);
-  // bro::remove_dir_brute(app_consts::HULK_SITE_DIR);
+  bro::remove_dir_brute(app_consts::HULK_DATA_DIR);
+  bro::remove_dir_brute(app_consts::HULK_SITE_DIR);
 }
 }

@@ -1,6 +1,7 @@
 mod cli_gui;
 mod generator;
 mod assets;
+mod index_all;
 mod report;
 mod pure;
 mod nav;
