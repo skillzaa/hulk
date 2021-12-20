@@ -2,7 +2,7 @@ use crate::bro;
 use crate::app_consts;
 use crate::bro::BrownError as Error;
 use crate::assets;
-pub fn create_test_data_dir()->Result<bool,Error>{
+pub fn create_demo_data_dir()->Result<bool,Error>{
 let _ = teardown_site();
 create_dirs()?;
 create_files()?;
@@ -21,7 +21,7 @@ format!("{}/{}",app_consts::HULK_DATA_DIR,"a4/a4b"),
 ];
 s
 }
-pub fn create_dirs()->Result<bool,Error>{
+fn create_dirs()->Result<bool,Error>{
 
 let dirs = demo_data_dir_struct();
 let dirs_str = dirs.iter()
@@ -30,7 +30,7 @@ let dirs_str = dirs.iter()
 bro::create_dir_structure(&dirs_str)?;
 Ok(true)
 }
-pub fn create_files()->Result<bool,Error>{
+fn create_files()->Result<bool,Error>{
 
 let mock_md_data = assets::demo_md();
 let data_dir_struct = demo_data_dir_struct();
@@ -52,7 +52,7 @@ mod tests {
     #[test]
 fn test_unit_module(){
   let t = 
-  create_test_data_dir();
+  create_demo_data_dir();
   assert!(t.is_ok());
 }
 

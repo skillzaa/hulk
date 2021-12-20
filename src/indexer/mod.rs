@@ -2,7 +2,9 @@ use crate::assets::*;
 use crate::bro;
 use brown::BrownError as Error;
 use crate::unit;
+use crate::generator;
 use std::fs::DirEntry;
+use crate::app_consts;
 use std::path::Path;
 /// Indexer is given the path of any folder and it will generate an index of all the (html) files there.
 #[derive(Debug)]
@@ -94,5 +96,20 @@ fn index_page_start_html()->String{
 //-----------------------------------
 #[cfg(test)]
 mod tests {
-
+use super::*;
+#[test]
+fn basic(){
+  let x = unit::create_demo_data_dir().unwrap();
+  assert!(x);
+  let y = generator::gen().unwrap();
+  assert!(y);
+  let i = Indexer::
+  new(app_consts::HULK_SITE_DIR.to_string());
+  assert!(i.is_some());
+  let ii = i.unwrap();
+  let r = ii.run().unwrap();
+  assert_eq!(r,1); 
+  // bro::remove_dir_brute(app_consts::HULK_DATA_DIR);
+  // bro::remove_dir_brute(app_consts::HULK_SITE_DIR);
+}
 }
