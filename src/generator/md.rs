@@ -43,13 +43,3 @@ page.push_str(md_to_html.as_str());
 page.push_str(get_default_footer());
 page
 }
-
-
-fn create_n_write_file(dest_clean:String,content:String)->bool{
-  let _b = 
-  bro::create_file_brute(dest_clean.as_str())
-  .unwrap();
-    let _r = bro::write_to_file
-    (&dest_clean, &content).unwrap();
-  true
-}

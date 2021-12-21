@@ -23,30 +23,18 @@ impl Report{
 }    
 
 pub fn gen_report()->Result<Report,Error>{
-let mut hunter = Report::default();
+let mut report = Report::default();
+
 let dir_struct = pure::data_dir_struct_clean()?;
-hunter.total_data_subfolders = dir_struct.len();  
-let site_dir_struct = bro::
-      clone_dir_structure(
-          app_consts::HULK_DATA_DIR,
-           app_consts::HULK_SITE_DIR);
-           
-       match site_dir_struct {
-       Ok(item)=>{},
-       Err(_e)=>{panic!("clone_dir_structure");},
-       }    
-      //--Outer loop around dirs
-      for dir in dir_struct{
-        // let navbar = nav::get_nav(&dir); 
-        //-----get files
-        let files_res = bro::get_files(&dir);
-        let files:Vec<DirEntry>;    
-        match files_res {
-            Ok(item)=>{
-                files = item;
-            },
-            Err(_e)=>{continue;},
-            }
+
+report.total_data_subfolders = dir_struct.len();  
+//This is report but we need to create site structure since we needs its dirs for nav
+clone_site_structure()?;
+      
+//--Outer loop around dirs
+    for dir in dir_struct{
+    // let navbar = nav::get_nav(&dir); 
+    let files = get_files(&dir)?;
         //----------------------- 
           //--Inner loop around files
           for file in files {
@@ -69,18 +57,48 @@ file_data.file_name = bro::get_file_name(&file).unwrap();
                 file_data.is_md = false;    
               },
             }
-        hunter.total_files = hunter.total_files +1;     
-        hunter.files_data.push(file_data);    
+        report.total_files = report.total_files +1;     
+        report.files_data.push(file_data);    
         }
       }
-      Ok(hunter)
-    }
+
+Ok(report)
+}
+//------------Report Ends-------------    
 fn get_content(file:&DirEntry)->String{
     let file_path = file.path();
     std::fs::
         read_to_string(&file_path).unwrap()
 }  
-    #[cfg(test)]
+fn clone_site_structure()->Result<bool,Error>{
+let site_dir_struct = bro::
+clone_dir_structure(
+    app_consts::HULK_DATA_DIR,
+     app_consts::HULK_SITE_DIR);
+     
+ match site_dir_struct {
+ Ok(_item)=>{Ok(true)},
+ Err(_e)=>{panic!("clone_dir_structure");},
+ } 
+}
+
+fn get_files(dir:&String)->Result<Vec<DirEntry>,Error>{
+let files_res = 
+bro::get_files(dir);
+
+match files_res {
+    Ok(item)=>{Ok(item)},
+    Err(e)=>{Err(e)},
+    }
+}   
+
+
+
+
+
+
+
+#[cfg(test)]
 mod tests {
     use super::*;
 #[test]

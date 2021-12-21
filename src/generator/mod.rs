@@ -4,38 +4,30 @@ use brown::BrownError as Error;
 use crate::bro;
 use md::md_file;
 use non_md::non_md_file;
-use crate::report::{gen_report,Report};
+use crate::report::{gen_report};
 use crate::pure;
 use crate::app_consts;
 
 pub fn gen()->Result<bool,Error>{
 //-->>>>>>>>>>>>>Gen Begin<<<<<<<<<<
-
-
 //--Step 00 delete old site folder 
 bro::remove_dir_brute(app_consts::HULK_SITE_DIR)?;
 
-//--Step 00 crate site forlder  
+//--Step 01 crate site forlder  
 pure::create_site_folder()?;
 
-//--Step  00 crate main css file  
+//--Step  002 create main css file  
 pure::create_css();
 
-//--Step 02 get report from Hunter 
+//--Step 03 get report from Hunter 
 let report = gen_report()?;
 
-// let data_dir_Struct = bro::
-// dir_structure_to_string(
-//   app_consts::HULK_DATA_DIR)?;
 
 //\\\\\\\\\\\-- THE LOOP --\\\\\\\\\\\\\\
 for info in report.files_data {
-  let file_name_raw = 
-  format!("{}/{}.html",info.site_path,info.file_name);
-  let file_name = 
-  file_name_raw.replace(' ', "_");  
-  
-//-----write files to disk
+  let file_name = get_file_name(&info.site_path,&info.file_name); 
+
+  //-----write files to disk
   bro::write_to_file
   (&file_name, &info.content)?;
 
@@ -44,6 +36,13 @@ for info in report.files_data {
 Ok(true)
 }//gen ends
 
+fn get_file_name(path:&String,file_name:&String)->String{
+  let file_name_raw = 
+  format!("{}/{}.html",path,file_name);
+  let file_name = 
+  file_name_raw.replace(' ', "_");  
+  file_name
+}
   mod tests {
     use super::*;
   #[test]
