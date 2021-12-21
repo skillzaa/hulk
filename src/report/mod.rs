@@ -2,12 +2,16 @@ mod file_move_info;
 mod sub_dirs_for_nav;
 use sub_dirs_for_nav::sub_dirs_for_nav;
 use crate::nav;
+use crate::assets;
 use brown::BrownError as Error;
 use crate::bro;
+use crate::unit;
 use std::fs::DirEntry;
 use crate::pure;
 use crate::app_consts;
 use file_move_info::FileMoveInfo;
+use comrak::{markdown_to_html, ComrakOptions};
+
 #[derive(Debug)]
 pub struct Report {
     pub total_files:usize,
@@ -64,14 +68,25 @@ file_data.site_path = String::from(pure::data_to_site_path_from_string
     (&dir)); 
 file_data.nav = navbar.clone();   
 file_data.file_name = bro::get_file_name(&file).unwrap();
-// file_data.content = get_content(&file);
+
         //--------------------------
               match pure::is_md(&file) {
               true=>{
-                file_data.is_md = true;    
+                file_data.is_md = true;
+                let mut content = String::new();
+                content.push_str(assets::get_default_header());    
+                content.push_str(&file_data.nav);
+                let md = get_content(&file);
+                let html =
+                comrak::markdown_to_html(&md,&ComrakOptions::default());
+                content.push_str(&html);
+                content.push_str(assets::get_default_footer());
+                
+                file_data.content = content;    
               },
               false=>{
                 file_data.is_md = false;    
+                file_data.content = get_content(&file);
               },
             }
         report.total_files = report.total_files +1;     
@@ -120,9 +135,11 @@ mod tests {
     use super::*;
 #[test]
 fn report(){
+let a = unit::create_demo_data_dir();    
     // let mut h = Report::default();
     let report = gen_report().unwrap();
-    // println!("{:#?}",report);
+    println!("{:#?}",report);
+let _ = unit::teardown_data();    
 }
 }
   

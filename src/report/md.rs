@@ -12,7 +12,7 @@ use crate::*;
  */
 use comrak::{markdown_to_html, ComrakOptions};
 // use comrak;
-pub fn md_file(file:&DirEntry,navbar:&String)->String{
+pub fn get_content(file:&DirEntry,navbar:&String)->String{
     let content = get_content(&file,navbar);  
     //let dest_clean = get_dest_clean_for_md(&file);
     content
@@ -23,7 +23,7 @@ let file_path_string = bro::direntry_to_path(&file).unwrap();
 let dest = file_path_string.replacen("data", "site", 1);
  let d = dest.replace("./","");
  let dd = d.replace("md","html");
- println!("{:?}",dd);
+//  println!("{:?}",dd);
         dd
 }
 fn get_content(file:&DirEntry,navbar:&String)->String{

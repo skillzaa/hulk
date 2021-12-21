@@ -1,9 +1,6 @@
-mod md;
-mod non_md;
+
 use brown::BrownError as Error;
 use crate::bro;
-use md::md_file;
-use non_md::non_md_file;
 use crate::report::{gen_report};
 use crate::pure;
 use crate::app_consts;
@@ -21,7 +18,6 @@ pure::create_css();
 
 //--Step 03 get report from Hunter 
 let report = gen_report()?;
-
 
 //\\\\\\\\\\\-- THE LOOP --\\\\\\\\\\\\\\
 for info in report.files_data {
@@ -43,7 +39,8 @@ fn get_file_name(path:&String,file_name:&String)->String{
   file_name_raw.replace(' ', "_");  
   file_name
 }
-  mod tests {
+
+mod tests {
     use super::*;
   #[test]
   fn run_test(){

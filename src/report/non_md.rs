@@ -1,7 +1,7 @@
 use std::fs::DirEntry;
 use crate::*;
 
-pub fn non_md_file(file:&DirEntry)->String{
+pub fn get_content(file:&DirEntry)->String{
     // let file_name = get_file_name(&file).unwrap();
     // println!("Non md file:: {}",file_name);
     let content = get_content(&file);  
