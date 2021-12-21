@@ -1,6 +1,8 @@
 use crate::assets::*;
 use std::fs::DirEntry;
 use crate::*;
+mod md;
+mod non_md;
 /**
  -- inner loop over each file in folder
     2-a: get file header

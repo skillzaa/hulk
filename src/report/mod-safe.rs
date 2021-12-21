@@ -61,13 +61,13 @@ clone_site_structure()?;
           for file in files {
         //--------------------------
 // if file.file_type()        
-// let mut file_data = FileMoveInfo::default();
-// file_data.data_path = String::from(&dir);   
-// file_data.file_ext = bro::get_ext(&file)?;
-// file_data.site_path = String::from(pure::data_to_site_path_from_string
-//     (&dir)); 
-// file_data.nav = navbar.clone();   
-// file_data.file_name = bro::get_file_name(&file).unwrap();
+let mut file_data = FileMoveInfo::default();
+file_data.data_path = String::from(&dir);   
+file_data.file_ext = bro::get_ext(&file)?;
+file_data.site_path = String::from(pure::data_to_site_path_from_string
+    (&dir)); 
+file_data.nav = navbar.clone();   
+file_data.file_name = bro::get_file_name(&file).unwrap();
 //--------------------------
               match pure::is_md(&file) {
               true=>{

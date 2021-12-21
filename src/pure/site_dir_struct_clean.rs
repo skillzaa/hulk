@@ -1,11 +1,17 @@
+use crate::bro::BrownError as Error;
+use crate::bro;
+use crate::app_consts;
 
-pub fn gen_site_dir_struct()->Result<Vec<String>,Error>{
-    let data_struct = self.data_dir_struct()?;
-    let output:Vec<String> = data_struct.into_iter()
-    .map(|i|i.replacen(
-      &self.data_dir_name, 
-      &self.site_dir_name,
-      1))
-      .collect::<Vec<String>>();
-    Ok(output)
+pub fn site_dir_struct_clean()->Result<Vec<String>,Error>{
+  let mut dir_struct = 
+  bro::dir_structure_to_string(
+      app_consts::HULK_SITE_DIR
+  )?;
+  //-- MY FIRST
+  let dir_struct_clean = 
+  dir_struct.iter_mut().
+  map(|i|i.replace("./",""))
+  .collect::<Vec<String>>();
+
+  Ok(dir_struct_clean)
   }

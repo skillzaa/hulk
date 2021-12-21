@@ -31,15 +31,5 @@ impl FileMoveInfo{
             is_md,
         }    
     }
-    pub fn default( )->Self{
-        FileMoveInfo {
-            data_path:"".to_string(),
-            site_path:"".to_string(),
-            file_name:"".to_string(),
-            file_ext:"".to_string(),
-            nav:"".to_string(),
-            content:"".to_string(),
-            is_md:false,
-        }    
-    }
+    
 }
