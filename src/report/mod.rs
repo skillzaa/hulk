@@ -1,4 +1,6 @@
 mod file_move_info;
+mod sub_dirs_for_nav;
+use sub_dirs_for_nav::sub_dirs_for_nav;
 use crate::nav;
 use brown::BrownError as Error;
 use crate::bro;
@@ -33,7 +35,22 @@ clone_site_structure()?;
       
 //--Outer loop around dirs
     for dir in dir_struct{
-    // let navbar = nav::get_nav(&dir); 
+    let sub_dirs_for_nav_res = 
+    sub_dirs_for_nav(&dir);
+    
+    let mut sub_dirs_for_nav:Vec<String>;    
+        match sub_dirs_for_nav_res {
+        Ok(item)=>{
+            sub_dirs_for_nav = item;
+        },
+        Err(_e)=>{
+            sub_dirs_for_nav = Vec::new();
+        },
+        }
+    let navbar = 
+    nav::get_nav(&dir,&sub_dirs_for_nav); 
+    //------------------------    
+    
     let files = get_files(&dir)?;
         //----------------------- 
           //--Inner loop around files
@@ -45,7 +62,7 @@ file_data.data_path = String::from(&dir);
 file_data.file_ext = bro::get_ext(&file)?;
 file_data.site_path = String::from(pure::data_to_site_path_from_string
     (&dir)); 
-file_data.nav = nav::get_nav(&file_data.site_path);   
+file_data.nav = navbar.clone();   
 file_data.file_name = bro::get_file_name(&file).unwrap();
 // file_data.content = get_content(&file);
         //--------------------------
@@ -105,7 +122,7 @@ mod tests {
 fn report(){
     // let mut h = Report::default();
     let report = gen_report().unwrap();
-    println!("{:#?}",report);
+    // println!("{:#?}",report);
 }
 }
   
