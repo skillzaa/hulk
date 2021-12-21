@@ -39,7 +39,7 @@ let file_path = format!("{}/{}.{}",site_dir_path,file_name,file_ext);
 let is_md = pure::is_md(&file);
 
 //======= finally
-let nav = get_nav();   
+let nav = get_nav(&dir_name_string);   
 let content = String::new();   
 //==================================
         Ok( HulkFile {
