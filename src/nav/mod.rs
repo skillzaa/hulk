@@ -1,4 +1,5 @@
-use super::nav;
+mod nv;
+use nv as nav;
 use crate::bro;
 use crate::app_consts;
 use crate::unit;

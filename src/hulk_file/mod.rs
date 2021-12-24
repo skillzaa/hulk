@@ -1,8 +1,6 @@
 use crate::bro;
 use crate::bro::BrownError as Error;
-mod get_nav;
-use get_nav::get_nav;
-mod nav;
+use crate::nav::get_nav;
 use crate::assets::*;
 use comrak::{markdown_to_html, ComrakOptions};
 

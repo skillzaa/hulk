@@ -2,6 +2,7 @@
 use crate::generator;
 use crate::help;
 use crate::init;
+use crate::indexer;
 use crate::app_consts;
 use brown::*; 
 use brown::BrownError as Error;
@@ -30,18 +31,18 @@ pub fn cli_gui() {
                       match gen_result {
                         Ok(_r)=>{
                             println!("Markdown to Html generation completed");  
+                            //---- now index
+                             let r = indexer::run();
+                            match r {
+                              Ok(_r)=>{
+                              println!("index files generated successfully");
+                              },
+                              Err(e)=> println!("{:?}",&e),
+                            }
                         },
                         Err(e)=> println!("{:?}",&e),
                       }
 
-                  
-                  // let r = index_all::run();
-                  // match r {
-                  //   Ok(_r)=>{
-                  //   println!("index files generated successfully");
-                  //   },
-                  //   Err(e)=> println!("{:?}",&e),
-                  // }
           },
          "init" => {
           let init_result = init::init();
