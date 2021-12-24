@@ -44,8 +44,7 @@ let is_md = pure::is_md(&file);
 
 //======= finally
 let nav = get_nav(&dir_name_string);   
-//--it has got all except content
-// let content = String::new();   
+
 //==================================
         Ok( HulkFile {
             data_dir_path,
@@ -117,8 +116,8 @@ fn basic(){
           .unwrap();
           
           println!("{:#?}",s);
-          let cont = s.get_content();
-          println!("{:#?}",cont);
+        //   let cont = s.get_content();
+        //   println!("{:#?}",cont);
       }
   }
   

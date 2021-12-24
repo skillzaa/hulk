@@ -49,6 +49,6 @@ let d = get_nav(&"data".to_string());
 let static_data = "<header id='header'><nav class='links' style='--items: 1;'><a href='./site/a2/index.html'>a2</a><a href='./site/a1/index.html'>a1</a><a href='./site/a3/index.html'>a3</a><a href='./site/a4/index.html'>a4</a></nav></header>";
 
 assert_eq!(d,static_data);
-//  let _ = unit::teardown_data();
+ let _ = unit::teardown_data();
 }
 }
