@@ -10,11 +10,11 @@ use std::fs::DirEntry;
 use crate::pure;
 use crate::unit;
 use crate::app_consts;
+
 #[derive(Debug,PartialEq, Eq)]
 pub struct HulkFile {
     pub data_dir_path:String,
     pub site_dir_path:String,
-    pub file_write_path:String,
     pub file_read_path:String,
     pub file_name:String,
     pub file_ext:String,
@@ -35,11 +35,12 @@ pure::data_to_site_path_from_string
 let file_ext = bro::get_ext(&file)?;
 //--> Step 04 : File Name    
 let file_name = bro::get_file_name(&file).unwrap();
-//--> Step 05 : File Name    
-let file_write_path = format!("{}/{}.{}",site_dir_path,file_name,file_ext);
+
+//--> Step 05 : File read path    
 let file_read_path = format!("{}/{}.{}",data_dir_path,file_name,file_ext);
 //--> Step 06 : File Name    
 let is_md = pure::is_md(&file);
+//--> Step 07 : File write path    
 
 //======= finally
 let nav = get_nav(&dir_name_string);   
@@ -49,7 +50,6 @@ let nav = get_nav(&dir_name_string);
         Ok( HulkFile {
             data_dir_path,
             site_dir_path,
-            file_write_path,
             file_read_path,
             file_name,
             file_ext,
@@ -58,6 +58,13 @@ let nav = get_nav(&dir_name_string);
         } )
 
 }//new fn
+pub fn get_file_write_path(&self)->String{
+ if self.is_md {
+    format!("{}/{}.html",self.site_dir_path,self.file_name)
+ }else {
+    format!("{}/{}.{}",self.site_dir_path,self.file_name,self.file_ext)
+ }
+}
 pub fn get_content(&self)->String{
     if self.is_md {
         self.get_md_content()
@@ -80,7 +87,7 @@ page.push_str(md_to_html.as_str());
 page.push_str(get_default_footer());
 page
 }
-pub fn get_non_md_content(&self)->String{
+fn get_non_md_content(&self)->String{
     let mut page = String::new();
 // page.push_str(get_default_header());
 //-----Actual Read Content------------------

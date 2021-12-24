@@ -13,5 +13,5 @@ pub use site_dir_struct_clean::site_dir_struct_clean;
 mod create_css;
 pub use create_css::create_css;
 
-mod create_site_folder;
-pub use create_site_folder::create_site_folder;
+mod clone_data_to_site_folder;
+pub use clone_data_to_site_folder::clone_data_to_site_folder;

@@ -1,4 +1,4 @@
-use crate::index_all;
+// use crate::index_all;
 use crate::generator;
 use crate::help;
 use crate::init;
@@ -35,13 +35,13 @@ pub fn cli_gui() {
                       }
 
                   
-                  let r = index_all::run();
-                  match r {
-                    Ok(_r)=>{
-                    println!("index files generated successfully");
-                    },
-                    Err(e)=> println!("{:?}",&e),
-                  }
+                  // let r = index_all::run();
+                  // match r {
+                  //   Ok(_r)=>{
+                  //   println!("index files generated successfully");
+                  //   },
+                  //   Err(e)=> println!("{:?}",&e),
+                  // }
           },
          "init" => {
           let init_result = init::init();
