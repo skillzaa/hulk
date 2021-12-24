@@ -4,7 +4,7 @@
 // Write pure code or dont waste time.
 pub fn nav(dir_path:&String,sub_dirs:&Vec<String>)->String{
 
-let mut nav = String::from("<header id='header'><nav class='links' style='--items: 1;'><a href='./index.html'>Home</a>");
+let mut nav = String::from("<header id='header'><nav class='links' style='--items: 1;'><a href='/index.html'>Home</a>");
 
 for sd in sub_dirs{
 let link = 
