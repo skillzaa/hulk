@@ -3,6 +3,8 @@ use crate::bro::BrownError as Error;
 mod get_nav;
 use get_nav::get_nav;
 mod nav;
+use crate::assets::*;
+use comrak::{markdown_to_html, ComrakOptions};
 
 use std::fs::DirEntry;
 use crate::pure;
@@ -12,11 +14,11 @@ use crate::app_consts;
 pub struct HulkFile {
     pub data_dir_path:String,
     pub site_dir_path:String,
-    pub file_path:String,
+    pub file_write_path:String,
+    pub file_read_path:String,
     pub file_name:String,
     pub file_ext:String,
     pub nav:String,
-    pub content:String,
     pub is_md:bool,
 }
 
@@ -34,26 +36,61 @@ let file_ext = bro::get_ext(&file)?;
 //--> Step 04 : File Name    
 let file_name = bro::get_file_name(&file).unwrap();
 //--> Step 05 : File Name    
-let file_path = format!("{}/{}.{}",site_dir_path,file_name,file_ext);
+let file_write_path = format!("{}/{}.{}",site_dir_path,file_name,file_ext);
+let file_read_path = format!("{}/{}.{}",data_dir_path,file_name,file_ext);
 //--> Step 06 : File Name    
 let is_md = pure::is_md(&file);
 
 //======= finally
 let nav = get_nav(&dir_name_string);   
-let content = String::new();   
+//--it has got all except content
+// let content = String::new();   
 //==================================
         Ok( HulkFile {
             data_dir_path,
             site_dir_path,
-            file_path,
+            file_write_path,
+            file_read_path,
             file_name,
             file_ext,
             nav,
-            content,
             is_md,
         } )
 
 }//new fn
+pub fn get_content(&self)->String{
+    if self.is_md {
+        self.get_md_content()
+    }else {
+        self.get_non_md_content()
+    }
+}
+
+fn get_md_content(&self)->String{
+let mut page = String::new();
+page.push_str(get_default_header());
+//-----Actual Read Content------------------
+let raw_content = std::fs::
+    read_to_string(&self.file_read_path).unwrap();
+//-----------------------------------------
+let md_to_html = 
+comrak::markdown_to_html(&raw_content,&ComrakOptions::default());
+page.push_str(&self.nav);
+page.push_str(md_to_html.as_str());
+page.push_str(get_default_footer());
+page
+}
+pub fn get_non_md_content(&self)->String{
+    let mut page = String::new();
+// page.push_str(get_default_header());
+//-----Actual Read Content------------------
+let content = std::fs::
+    read_to_string(&self.file_read_path).unwrap();
+
+page.push_str(&content);
+// page.push_str(get_default_footer());
+page
+}
 }
 
 mod tests {
@@ -71,7 +108,10 @@ fn basic(){
           let s = HulkFile
           ::new(&dir, &file)
           .unwrap();
+          
           println!("{:#?}",s);
+          let cont = s.get_content();
+          println!("{:#?}",cont);
       }
   }
   

@@ -5,7 +5,7 @@ mod hulk_file;
 // mod index_all;
 // mod report;
 mod pure;
-// mod indexer;
+//mod indexer;
 mod help;
 mod init;
 mod unit;

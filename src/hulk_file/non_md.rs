@@ -11,12 +11,6 @@ pub fn get_content(file:&DirEntry)->String{
 
 }
 
-fn get_dest_clean(file:&DirEntry)->String{
-let file_path_string = bro::direntry_to_path(&file).unwrap();        
-let dest = file_path_string.replacen("data", "site", 1);
- let d = dest.replace("./","");
-        d
-}
 fn get_content(file:&DirEntry)->String{
   let file_path = file.path();
   std::fs::
