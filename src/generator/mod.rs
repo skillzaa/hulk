@@ -7,7 +7,7 @@ use crate::app_consts;
 pub fn gen()->Result<bool,Error>{
 //-->>>>>>>>>>>>>Gen Begin<<<<<<<<<<
 //--Step 00 delete old site folder 
-bro::remove_dir_brute(app_consts::HULK_SITE_DIR)?;
+let _ = bro::remove_dir_brute(app_consts::HULK_SITE_DIR);
 //--Step 01 clone data folder structure  
 pure::clone_data_to_site_folder()?;
 
@@ -18,8 +18,11 @@ let dirs =
 pure::data_dir_struct_clean()?;
 
   for dir in dirs{
-      let files = bro::get_files(&dir)?;
-      for file in files {
+      let files_res = bro::get_files(&dir);
+      
+      match files_res {
+      Ok(files)=>{
+        for file in files {
           let hulk_file = HulkFile
           ::new(&dir, &file)?;
           
@@ -27,6 +30,12 @@ pure::data_dir_struct_clean()?;
             hulk_file.get_file_write_path().as_str(), 
             &hulk_file.get_content());
       }
+        
+      },
+      Err(_e)=>{continue;},
+      }
+
+      
 }
 //\\\\\\\\\\\-- THE LOOP ENDS --\\\\\\\\\\\
 Ok(true)

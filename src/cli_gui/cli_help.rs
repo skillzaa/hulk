@@ -1,5 +1,5 @@
 
-pub fn help(){
+pub fn cli_help(){
 println!("Help");
 println!("====");
 println!("Please use following commands");

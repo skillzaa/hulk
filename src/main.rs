@@ -5,7 +5,6 @@ mod hulk_file;
 mod pure;
 mod nav;
 mod indexer;
-mod help;
 mod init;
 mod unit;
 // mod gui;

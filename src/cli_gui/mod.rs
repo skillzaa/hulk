@@ -1,22 +1,15 @@
-// use crate::index_all;
-use crate::generator;
-use crate::help;
-use crate::init;
-use crate::indexer;
-use crate::app_consts;
-use brown::*; 
-use brown::BrownError as Error;
+mod cli_gen;
+mod cli_index;
+mod cli_init;
+mod cli_help;
+
+mod common;
+use common::*;
 use std::env;
 use yansi::Paint;
 // use crate::brown;
 pub fn cli_gui() {
- let gap = "                           "; 
-  println! ("{}",gap);
-  println! ("{}",gap);
-  let bar_top = "================== HULK =======================";
-  println!("{}",Paint::green(bar_top));
-  println! ("{}",gap);
-  println! ("{}",gap);
+  print_hulk_top_bar();
 
   let args: Vec<String> = env::args().collect();
 
@@ -27,44 +20,23 @@ pub fn cli_gui() {
       let v = value.as_str();
         match v {
           "gen" => {
-            let gen_result = generator::gen();
-                      match gen_result {
-                        Ok(_r)=>{
-                            println!("Markdown to Html generation completed");  
-                            //---- now index
-                             let r = indexer::run();
-                            match r {
-                              Ok(_r)=>{
-                              println!("index files generated successfully");
-                              },
-                              Err(e)=> println!("{:?}",&e),
-                            }
-                        },
-                        Err(e)=> println!("{:?}",&e),
-                      }
-
+            cli_gen::cli_gen();
+            //---- now index
+            cli_index::cli_index();          
           },
+         "index" => {
+          cli_index::cli_index();          
+        },
          "init" => {
-          let init_result = init::init();
-                      match init_result {
-                        Ok(_r)=>{
-                            println!("Project initialized....");
-                        },
-                        Err(e)=> println!("{:?}",&e),
-                      } 
+         cli_init::cli_init();
           },
           // "gui" => gui::gui(),
-          "help" => help::help(),
+          "help" => cli_help::cli_help(),
           _ => println!("command not found ==> {}", Paint::red(v)),
         }
     },
-    None => {help::help()},
+    None => {cli_help::cli_help()},
   }
-  
-  println! ("{}",gap);
-  let bar_bot = "================== HULK ENDS ======================= "; 
-  println!("{}",Paint::green(bar_bot));
-  println! ("{}",gap);
-
+  print_hulk_bot_bar();
 
 }//main
