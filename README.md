@@ -1,4 +1,4 @@
-# Please download from crates.io, This version is being worked upon. Better yet wait for few days.
+# Please -This software is being worked upon. Better wait till version 1.0.
 # HULK
 
 ---
