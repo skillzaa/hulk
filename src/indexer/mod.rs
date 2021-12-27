@@ -67,6 +67,6 @@ fn basic(){
   } //checking each folder ends here
     //-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   bro::remove_dir_brute(app_consts::HULK_DATA_DIR);
-  bro::remove_dir_brute(app_consts::HULK_SITE_DIR);
+  //bro::remove_dir_brute(app_consts::HULK_SITE_DIR);
 }
 }
