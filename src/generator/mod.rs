@@ -8,11 +8,11 @@ pub fn gen()->Result<bool,Error>{
 //-->>>>>>>>>>>>>Gen Begin<<<<<<<<<<
 //--Step 00 delete old site folder 
 let _ = bro::remove_dir_brute(app_consts::HULK_SITE_DIR);
-//--Step 01 clone data folder structure  
-pure::clone_data_to_site_folder()?;
-
+//--Step 01 clone/CREATE data folder structure  
+//--if this fail the gen process will break
+pure::clone_data_to_site_folder();
 //--Step  002 create main css file  
-pure::create_css();
+//pure::create_css();
 //\\\\\\\\\\\-- THE LOOP --\\\\\\\\\\\\\\
 let dirs = 
 pure::data_dir_struct_clean()?;
@@ -72,5 +72,12 @@ fn basic(){
   //----------------------------------------------
   bro::remove_dir_brute(app_consts::HULK_DATA_DIR);
   bro::remove_dir_brute(app_consts::HULK_SITE_DIR);
+}
+#[test]
+fn organic(){
+  
+  let y = generator::gen().unwrap();
+  assert!(y);
+ 
 }
 }
