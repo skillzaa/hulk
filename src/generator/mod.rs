@@ -70,7 +70,7 @@ fn basic(){
     assert_eq!(files.len(),1);
   }
   //----------------------------------------------
-  // bro::remove_dir_brute(app_consts::HULK_DATA_DIR);
-  // bro::remove_dir_brute(app_consts::HULK_SITE_DIR);
+  bro::remove_dir_brute(app_consts::HULK_DATA_DIR);
+  bro::remove_dir_brute(app_consts::HULK_SITE_DIR);
 }
 }
