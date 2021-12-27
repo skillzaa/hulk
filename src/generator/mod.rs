@@ -14,7 +14,7 @@ let _ = bro::remove_dir_brute(app_consts::HULK_SITE_DIR);
 //--if this fail the gen process will break
 let _ = create_site_folder();
 //--Step  002 create main css file  
-//pure::create_css();
+pure::create_css();
 //\\\\\\\\\\\-- THE LOOP --\\\\\\\\\\\\\\
 let dirs = 
 pure::data_dir_struct_clean()?;

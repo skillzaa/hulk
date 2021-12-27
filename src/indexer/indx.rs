@@ -102,6 +102,7 @@ fn create_empty_index(&self){
   let mut s = String::new();
   let h = assets::get_default_header();
   s.push_str(&h.to_string());
+  s.push_str("<a href='/index.html'>Home</a>");
   s.push_str("<h3>No files found...</h3>");
   s.push_str(assets::get_default_footer());
    let _ = bro::create_file_brute(&self.index_file_path);
