@@ -3,6 +3,8 @@ use crate::bro;
 use crate::hulk_file::HulkFile;
 use crate::pure;
 use crate::app_consts;
+mod create_site_folder;
+use create_site_folder::create_site_folder;
 
 pub fn gen()->Result<bool,Error>{
 //-->>>>>>>>>>>>>Gen Begin<<<<<<<<<<
@@ -10,7 +12,7 @@ pub fn gen()->Result<bool,Error>{
 let _ = bro::remove_dir_brute(app_consts::HULK_SITE_DIR);
 //--Step 01 clone/CREATE data folder structure  
 //--if this fail the gen process will break
-pure::clone_data_to_site_folder();
+let _ = create_site_folder();
 //--Step  002 create main css file  
 //pure::create_css();
 //\\\\\\\\\\\-- THE LOOP --\\\\\\\\\\\\\\
