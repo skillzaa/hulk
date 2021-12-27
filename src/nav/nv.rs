@@ -42,8 +42,9 @@ sub_dirs.push("ee".to_string());
 sub_dirs.push("ff".to_string());
 let r = nav(&dir_path,&sub_dirs);
 println!("{:?}",r);
- let static_data = r#"<header id='header'><nav class='links' style='--items: 1;'><a href='./index.html'>Home</a><a href='./cc/index.html'>cc</a><a href='./dd/index.html'>dd</a><a href='./ee/index.html'>ee</a><a href='./ff/index.html'>ff</a></nav></header>"#;
+ let static_data = r#"<header id='header'><nav class='links' style='--items: 1;'><a href='/index.html'>Home</a><a href='./cc/index.html'>cc</a><a href='./dd/index.html'>dd</a><a href='./ee/index.html'>ee</a><a href='./ff/index.html'>ff</a></nav></header>"#;
 assert_eq!(r.as_str(),static_data);
 }
+
 //--mod tests
 }

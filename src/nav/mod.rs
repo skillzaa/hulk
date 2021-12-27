@@ -26,18 +26,21 @@ bro::get_dirs(dir_path);
                 sub_dirs.push(llll);
                 (&dir_path, &sub_dirs);
             }
-// here is the hidden problem --change the dir_path in to site dir path before sending
-let site_dir_path = dir_path.replace(
-    app_consts::HULK_DATA_DIR,
-    app_consts::HULK_SITE_DIR,
-);
-//--ERROR--REMOVE ERROR
-// let wrong = format!("{}/",app_consts::HULK_SITE_DIR);
-// let remove_site_slash = llll
-// .replace(&wrong,"");
+        // here is the hidden problem --change the dir_path in to site dir path before sending
+        let site_dir_path = dir_path.replace(
+            app_consts::HULK_DATA_DIR,
+            app_consts::HULK_SITE_DIR,
+        );
+        //--ERROR--REMOVE ERROR
+        // let wrong = format!("{}/",app_consts::HULK_SITE_DIR);
+        // let remove_site_slash = llll
+        // .replace(&wrong,"");
         return nav::nav(&site_dir_path,&sub_dirs)
         },
-        Err(_e)=>{ return "no sub dirs".to_string();},
+        Err(_e)=>{ 
+            return "<header id='header'><nav class='links' style='--items: 1;'><a href='/index.html'>Home</a></nav></header>"
+            
+            .to_string();},
         }
 }
 
