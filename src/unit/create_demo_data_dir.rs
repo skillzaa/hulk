@@ -3,7 +3,7 @@ use crate::app_consts;
 use crate::bro::BrownError as Error;
 use crate::assets;
 pub fn create_demo_data_dir()->Result<bool,Error>{
-let _ = teardown_site();
+let _ = teardown_data();
 create_dirs()?;
 create_files()?;
 Ok(true)
